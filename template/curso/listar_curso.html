@@ -1,0 +1,45 @@
+
+{% extends 'index.html' %}
+
+{% block titulo %}
+Lista de cursos 
+{% endblock titulo %}
+{% block body %}
+  <a href="{% url 'crear_curso'%}">
+     <button type="submit">Crear curso</button>
+  </a>
+  {% if cursos%}
+    <table>
+      <thead>
+        <tr>
+          <th> codigo </th>
+          <th>nombre</th>
+          <th>cdt</th>
+          <th>Escuela Profesional</th>
+          <th>Grp</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for curso1 in cursos%}
+          <tr>
+            <td>{{ curso1.code }}</td>
+            <td>{{ curso1.name }}</td>
+            <td>{{ curso1.credits }}</td>
+            <td>{{ curso1.carrera }}</td>
+            <td>{{ curso1.grupo }}</td>
+            <td>
+            <a href="{% url 'editar_curso' curso1.code %}">Editar</a>
+            </td>
+            <td>
+            <a href="{% url 'eliminar_curso' curso1.code %}">Eliminar</a>
+            </td>
+         </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <h1>No existe cursos</h1>
+  {% endif %}
+{% endblock body %}
