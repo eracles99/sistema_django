@@ -6,8 +6,12 @@
      {% if error %}
         <h2>{{ error }}</h2>
      {% else %}
+        <div>
+           <div class="mx-auto" style="width: 200px;">Crear Nuevo Curso</div>
+        </div>
+        <p class="text-break"><h2 class="">Crear Nuevo Curso</h2></p>
         {{ curso_form.as_p }}
-        <button type="submit">Crear</button>
+        <button type="submit" class="btn btn-success">crear</button>
      {% endif %}
   </form>
 {% endblock body %}

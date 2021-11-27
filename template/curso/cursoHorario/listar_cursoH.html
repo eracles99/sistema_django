@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% block titulo %}
+Lista de Horarios de los cursos
+{% endblock titulo %}
+
+{% block body %}
+<div>
+    <a href="{% url 'crear_cursoh'%}">
+    <button type="button" class="btn btn-dark">Nuevo Horario</button>
+    </a>
+    <a href="{% url 'listar_curso'%}">
+    <button type="button" class="btn btn-dark">Cursos</button>
+    </a>
+</div>
+  <di >
+     <div class="mx-auto" style="width: 600px;">
+        <p class="text-break">
+           <h2 class="">LISTADO DE HORARIOS DE CURSOS</h2>
+        </p>
+     </div>
+
+  </div>
+
+  {% if cursosH%}
+    
+    <div class='container'>
+      <di class="row">
+        <di class='col-md-'>
+          <table border="1" class="table  table-hover table-bordered " cellpadding="10">
+            <thead>
+              <tr>
+                <th> Id </th>
+                <th>TIPO</th>
+                <th>HT</th>
+                <th>HP</th>
+                <th>DIA</th>
+                <th>HR-INICIO</th>
+                <th>HR-FIN</th>
+                <th>MATRICULADOS</th>
+                <th>SEMESTRE</th>
+                <th>COD-CURSO</th>
+                <th>EDITAR</th>
+                <th>ELIMINAR</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for curso1 in cursosH%}
+                <tr>
+                  <td>{{ curso1.id }}</td>
+                  <td>{{ curso1.tipo }}</td>
+                  <td>{{ curso1.ht }}</td>
+                  <td>{{ curso1.hp }}</td>
+                  <td>{{ curso1.day }}</td>
+                  <td>{{ curso1.hr_i }}</td>
+                  <td>{{ curso1.hr_f }}</td>
+                  <td>{{ curso1.matriculados }}</td>
+                  <td>{{ curso1.semestre }}</td>
+                  <td>{{ curso1.id_curso }}</td>
+                  <td>
+                     <a href="{% url 'editar_cursoh' curso1.id %}"><button type="button" class="btn btn-success">Edit</button></a>
+                  </td>
+                  <td>
+                     <a href="{% url 'eliminar_cursoh' curso1.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                  </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </di>
+      </di>
+    </div>
+  {% else %}
+    <h1>No existe cursos</h1>
+  {% endif %}
+{% endblock body %}

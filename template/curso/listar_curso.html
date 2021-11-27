@@ -1,44 +1,61 @@
 
 {% extends 'index.html' %}
-
 {% block titulo %}
 Lista de cursos 
 {% endblock titulo %}
 {% block body %}
   <a href="{% url 'crear_curso'%}">
-     <button type="submit">Crear curso</button>
+    <button type="button" class="btn btn-dark">Nuevo Curso</button>
   </a>
+  <a href="{% url 'listar_cursoh' %}"><button type="button" class="btn btn-primary">Horarios</button></a>
+  <di >
+     <div class="mx-auto" style="width: 430px;">
+        <p class="text-break">
+           <h2 class="">LISTADO DE CURSOS</h2>
+        </p>
+     </div>
+
+  </div>
+
   {% if cursos%}
-    <table>
-      <thead>
-        <tr>
-          <th> codigo </th>
-          <th>nombre</th>
-          <th>cdt</th>
-          <th>Escuela Profesional</th>
-          <th>Grp</th>
-          <th>Editar</th>
-          <th>Eliminar</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for curso1 in cursos%}
-          <tr>
-            <td>{{ curso1.code }}</td>
-            <td>{{ curso1.name }}</td>
-            <td>{{ curso1.credits }}</td>
-            <td>{{ curso1.carrera }}</td>
-            <td>{{ curso1.grupo }}</td>
-            <td>
-            <a href="{% url 'editar_curso' curso1.code %}">Editar</a>
-            </td>
-            <td>
-            <a href="{% url 'eliminar_curso' curso1.code %}">Eliminar</a>
-            </td>
-         </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    
+    <div class='container'>
+      <di class="row">
+        <di class='col-md-'>
+          <table border="1" class="table  table-hover table-bordered " cellpadding="10">
+            <thead>
+              <tr>
+                <th> codigo </th>
+                <th>nombre</th>
+                <th>cdt</th>
+                <th>Escuela Profesional</th>
+                <th>Grp</th>
+                <th>Hr.Disponible</th>
+                <th>Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for curso1 in cursos%}
+                <tr>
+                  <td>{{ curso1.code }}</td>
+                  <td>{{ curso1.name }}</td>
+                  <td>{{ curso1.credits }}</td>
+                  <td>{{ curso1.carrera }}</td>
+                  <td>{{ curso1.grupo }}</td>
+                  <td>
+                      <a href="{% url 'listar_cursoh' %}"><button type="button" class="btn btn-info">Horarios</button></a>
+                  </td>
+                  <td>
+                     <a href="{% url 'editar_curso' curso1.code %}"><button type="button" class="btn btn-success">Edit</button></a>
+                     <a href="{% url 'eliminar_curso' curso1.code %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                  </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </di>
+      </di>
+    </div>
   {% else %}
     <h1>No existe cursos</h1>
   {% endif %}
