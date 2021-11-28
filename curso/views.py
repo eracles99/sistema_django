@@ -13,7 +13,7 @@ def crearCurso(request):
             return redirect('listar_curso') 
     else:
         curso_form=cursoForm()
-    return render(request,'curso/crear_curso.html',{'curso_form':curso_form})
+        return render(request,'curso/crear_curso.html',{'curso_form':curso_form})
 def listarCurso(request):
     cursos=curso.objects.all()
     return render(request,'curso/listar_curso.html',{'cursos':cursos})
@@ -70,3 +70,12 @@ def eliminarCursoH(request,id):
     curso1=CursosHorarios.objects.get(id=id)
     curso1.delete()
     return redirect('listar_cursoh')
+#-----------------------horios-curso------------------------------
+def mostrarNomCod(request,code):
+    if request.method == 'GET':
+            cursoHD=curso.objects.get(code=code)
+            shared =CursosHorarios.objects.filter(id_curso_id=code)
+    return render(request,'curso/CursoHorario/horarios_curso.html',context={'cursoHD':cursoHD,'shared':shared})
+
+
+        

@@ -7,7 +7,9 @@ Lista de cursos
   <a href="{% url 'crear_curso'%}">
     <button type="button" class="btn btn-dark">Nuevo Curso</button>
   </a>
-  <a href="{% url 'listar_cursoh' %}"><button type="button" class="btn btn-primary">Horarios</button></a>
+  <a href="{% url 'listar_cursoh'%}">
+    <button type="button" class="btn btn-dark">Horarios</button>
+  </a>
   <di >
      <div class="mx-auto" style="width: 430px;">
         <p class="text-break">
@@ -43,7 +45,11 @@ Lista de cursos
                   <td>{{ curso1.carrera }}</td>
                   <td>{{ curso1.grupo }}</td>
                   <td>
-                      <a href="{% url 'listar_cursoh' %}"><button type="button" class="btn btn-info">Horarios</button></a>
+                    <a href="{% url 'mostrarNomCod' curso1.code %}">
+                      <button type="button" class="btn btn-info">
+                        Horarios
+                      </button>
+                    </a>
                   </td>
                   <td>
                      <a href="{% url 'editar_curso' curso1.code %}"><button type="button" class="btn btn-success">Edit</button></a>

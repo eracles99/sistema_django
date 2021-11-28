@@ -1,0 +1,105 @@
+{% extends 'index.html' %}
+{% block titulo %}
+Lista de Horarios del curso
+{% endblock titulo %}
+{% block body %}
+   <a href="{% url 'listar_cursoh'%}">
+    <button type="button" class="btn btn-dark">Horarios</button>
+    <a href="{% url 'listar_curso'%}">
+    <button type="button" class="btn btn-dark">Cursos</button>
+    </a>
+   </a>
+   {% if cursoHD %}
+        <tr>
+          <div class="mx-auto" style="width: 430px;">
+            <p class="text-break">
+              <h2 class="">Horarios</h2>
+            </p>
+          </div>
+        </tr>
+        <div class="container px-1">
+            <div class="row gx-3">
+                <div class="col-sm-5">
+                  <div class="p-1 border bg-light">{{cursoHD.code}}</div>
+                </div>
+                <div class="col-sm-5">
+                   <div class="p-1 border bg-light">{{cursoHD.name}}</div>
+                </div>
+            </div>
+        </div>
+        &nbsp;
+        <div >
+            <div class="container px-1">
+                <form class="row g-3">
+                   <div >
+                        <div class="row mb-3">
+                           <label for="inputEmail3" class="col-sm-2 col-form-label">SEMESTRE</label>
+                           <div class="col-sm-3">
+                              <input type="text" class="form-control" id="inputEmail3">
+                           </div>
+                           <div class="col-sm-5">
+                              <button type="button" class="btn btn-success">Buscar</button>
+                           </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+   {% endif %}
+   {% if shared%}
+        <div class='container'>
+            <di class="row">
+                <di class='col-md-'>
+                    <table border="1" class="table  table-hover table-bordered " cellpadding="10">
+                        <div>
+                            <form>
+                                <input type='' name="">
+                            </form> 
+                        </div>
+                        <thead>
+                            <tr>
+                                <th> Id </th>
+                                <th>TIPO</th>
+                                <th>HT</th>
+                                <th>HP</th>
+                                <th>DIA</th>
+                                <th>HR-INICIO</th>
+                                <th>HR-FIN</th>
+                                <th>MATRICULADOS</th>
+                                <th>SEMESTRE</th>
+                                <th>COD-CURSO</th>
+                                <th>EDITAR</th>
+                                <th>ELIMINAR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for curso1 in shared%}
+                                <tr>
+                                    <td>{{ curso1.id }}</td>
+                                    <td>{{ curso1.tipo }}</td>
+                                    <td>{{ curso1.ht }}</td>
+                                    <td>{{ curso1.hp }}</td>
+                                    <td>{{ curso1.day }}</td>
+                                    <td>{{ curso1.hr_i }}</td>
+                                    <td>{{ curso1.hr_f }}</td>
+                                    <td>{{ curso1.matriculados }}</td>
+                                    <td>{{ curso1.semestre }}</td>
+                                    <td>{{ curso1.id_curso }}</td>
+                                    <td>
+                                        <a href="{% url 'editar_cursoh' curso1.id %}"><button type="button" class="btn btn-success">Edit</button></a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'eliminar_cursoh' curso1.id %}">
+                                            <button type="button" class="btn btn-danger">Delete</button>
+                                        </a>
+                                    </td>
+                               </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </di>
+            </di>
+        </div>
+    {% endif %}
+{% endblock %}
+

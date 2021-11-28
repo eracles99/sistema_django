@@ -4,21 +4,19 @@ Lista de Horarios de los cursos
 {% endblock titulo %}
 
 {% block body %}
-<div>
+  <div>
     <a href="{% url 'crear_cursoh'%}">
     <button type="button" class="btn btn-dark">Nuevo Horario</button>
     </a>
     <a href="{% url 'listar_curso'%}">
     <button type="button" class="btn btn-dark">Cursos</button>
     </a>
-</div>
-  <di >
-     <div class="mx-auto" style="width: 600px;">
-        <p class="text-break">
-           <h2 class="">LISTADO DE HORARIOS DE CURSOS</h2>
-        </p>
-     </div>
-
+  </div>
+    <div class="mx-auto" style="width: 600px;">
+      <p class="text-break">
+        <h2 class="">LISTADO DE HORARIOS DE CURSOS</h2>
+      </p>
+    </div>
   </div>
 
   {% if cursosH%}
@@ -27,6 +25,11 @@ Lista de Horarios de los cursos
       <di class="row">
         <di class='col-md-'>
           <table border="1" class="table  table-hover table-bordered " cellpadding="10">
+           <div>
+              <form>
+                <input type='' name="">
+              </form> 
+           </div>
             <thead>
               <tr>
                 <th> Id </th>
@@ -60,7 +63,9 @@ Lista de Horarios de los cursos
                      <a href="{% url 'editar_cursoh' curso1.id %}"><button type="button" class="btn btn-success">Edit</button></a>
                   </td>
                   <td>
-                     <a href="{% url 'eliminar_cursoh' curso1.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                     <a href="{% url 'eliminar_cursoh' curso1.id %}">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                      </a>
                   </td>
               </tr>
               {% endfor %}
