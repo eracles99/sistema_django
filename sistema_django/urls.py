@@ -20,10 +20,21 @@ from django.urls import path
 from django.urls.conf import include
 
 from curso.views import Home
+from docentes.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('home/',Home.as_view(), name='home'),
+<<<<<<< HEAD
     path('home/',Home,name='home'),
     path('curso/',include('curso.urls'),name='curso'),
+<<<<<<< HEAD
     path('', include('Carga_Academica.urls'))
+=======
+    path('docentes/',include('docentes.urls'),name='docentes'),
+=======
+    path('',Home,name='home'),
+    path('curso/',include('curso.urls'),name='curso')
+>>>>>>> papicha
+    
+>>>>>>> 94263f51f4cd1188d60c6a6ce49aeb74da9b4a0d
 ]

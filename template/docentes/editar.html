@@ -1,0 +1,21 @@
+
+{% load static %}
+
+{% block content %}
+
+{% include 'partials/_alerts.html' %}
+
+<div class="card">
+    <div class="card-header">
+        <h2>EDITAR DATOS DEL DOCENTE</h2>
+    </div>
+    <div class="card-body">
+        <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ docente_form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
