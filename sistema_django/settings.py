@@ -39,13 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sistema_django',
-    'bootstrap5',
     'curso',
-<<<<<<< HEAD
     'Carga_Academica',
-=======
     'docentes',
->>>>>>> 94263f51f4cd1188d60c6a6ce49aeb74da9b4a0d
 ]
 
 MIDDLEWARE = [

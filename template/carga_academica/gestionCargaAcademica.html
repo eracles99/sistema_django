@@ -16,7 +16,7 @@
         <h2>Gestión de Cargas Academicas</h2>
         <div class="card">
             <div class="card-body">
-                <form action="/registrarCargaAcademica/" method="POST">{% csrf_token %}
+                <form action="/carga/registrarCargaAcademica/" method="POST">{% csrf_token %}
                     <div class="form-group">
                         <input type="text" id="txtCodigo" name="txtCodigo" class="form-control" placeholder="Código"
                             minlength="8" maxlength="8" required>
@@ -54,7 +54,11 @@
                             maxlength="50" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="txtHorario" name="txtHorario" class="form-control" placeholder="Horario"
+                        <input type="text" id="txtHorario_I" name="txtHorario_I" class="form-control" placeholder="Horario_I"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtHorario_F" name="txtHorario_F" class="form-control" placeholder="Horario_F"
                             maxlength="50" required>
                     </div>
                     <div class="form-group">
@@ -88,7 +92,8 @@
                         <th>Ht</th>
                         <th>Hp</th>
                         <th>Dia</th>
-                        <th>Horario</th>
+                        <th>H-Inicio</th>
+                        <th>H-Final</th>
                         <th>Aula</th>
                         <th>Matriculados</th>
                         <th colspan="2">Opciones</th>
@@ -107,7 +112,8 @@
                         <td>{{ ca.Ht }}</td>
                         <td>{{ ca.Hp }}</td>
                         <td>{{ ca.Dia }}</td>
-                        <td>{{ ca.Horario }}</td>
+                        <td>{{ ca.Horario_I}}</td>
+                        <td>{{ ca.Horario_F }}</td>
                         <td>{{ ca.Aula }}</td>
                         <td>{{ ca.Matriculados }}</td>
                         <td><a href="edicionCargaAcademica/{{ca.Codigo}}" class="btn btn-info">Editar</a></td>

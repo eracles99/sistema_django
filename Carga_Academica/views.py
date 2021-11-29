@@ -21,12 +21,13 @@ def registrarCargaAcademica(request):
     Ht = request.POST['txtHt']
     Hp = request.POST['txtHp']
     Dia = request.POST['txtDia']
-    Horario = request.POST['txtHorario']
+    Horario_I = request.POST['txtHorario_I']
+    Horario_F = request.POST['txtHorario_F']
     Aula = request.POST['txtAula']
     Matriculados = request.POST['txtMatriculados']
 
     cargaAcademica = CargaAcademica.objects.create(
-        Codigo=Codigo, Carrera=Carrera, Docente=Docente, Creditos=Creditos, Tipo=Tipo, Gpo=Gpo, Ht=Ht, Hp=Hp, Dia=Dia, Horario=Horario, Aula=Aula, Matriculados=Matriculados)
+        Codigo=Codigo, Carrera=Carrera, Docente=Docente, Creditos=Creditos, Tipo=Tipo, Gpo=Gpo, Ht=Ht, Hp=Hp, Dia=Dia, Horario_I=Horario_I,Horario_F=Horario_F, Aula=Aula, Matriculados=Matriculados)
     messages.success(request, '¡Carga Academica registrado!')
     return redirect('/')
 
@@ -46,7 +47,8 @@ def editarCargaAcademica(request):
     Ht = request.POST['txtHt']
     Hp = request.POST['txtHp']
     Dia = request.POST['txtDia']
-    Horario = request.POST['txtHorario']
+    Horario_I = request.POST['txtHorario_I']
+    Horario_F = request.POST['txtHorario_F']
     Aula = request.POST['txtAula']
     Matriculados = request.POST['txtMatriculados']
 
@@ -59,7 +61,8 @@ def editarCargaAcademica(request):
     cargaAcademica.Ht =Ht
     cargaAcademica.Hp = Hp
     cargaAcademica.Dia = Dia
-    cargaAcademica.Horario = Horario
+    cargaAcademica.Horario_I = Horario_I
+    cargaAcademica.Horario_I = Horario_F
     cargaAcademica.Aula = Aula
     cargaAcademica.Matriculados = Matriculados
     cargaAcademica.save()

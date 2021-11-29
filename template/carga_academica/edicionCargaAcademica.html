@@ -8,7 +8,7 @@
         <h2>Edicion de Carga Academica</h2>
         <div class="card">
             <div class="card-body">
-                <form action="/editarCargaAcademica/" method="POST">{% csrf_token %}
+                <form action="/carga/editarCargaAcademica/" method="POST">{% csrf_token %}
                     <div class="form-group">
                         <input type="text" id="txtCodigo" name="txtCodigo" value="{{cargaAcademica.Codigo}}" class="form-control" placeholder="Código"
                             minlength="8" maxlength="8"  readonly required>
@@ -46,7 +46,12 @@
                             maxlength="50" required>
                     </div>
                     <div class="form-group">
-                        <input type="text" id="txtHorario" name="txtHorario" value="{{cargaAcademica.Horario}}" class="form-control" placeholder="Horario"
+                        <input type="text" id="txtHorario_I" name="txtHorario_I" value="{{cargaAcademica.Horario_I}}" class="form-control" placeholder="Horario_I"
+                            maxlength="50" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" id="txtHorario_F" name="txtHorario_F" value="{{cargaAcademica.Horario_F}}" class="form-control" placeholder="Horario_F"
                             maxlength="50" required>
                     </div>
                     <div class="form-group">
