@@ -23,7 +23,7 @@ from curso.views import Home
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('home/',Home.as_view(), name='home'),
-    path('home/',Home,name='home'),
+    path('',Home,name='home'),
     path('curso/',include('curso.urls'),name='curso')
     
 ]
