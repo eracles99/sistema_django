@@ -25,7 +25,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('home/',Home.as_view(), name='home'),
     path('curso/',include('curso.urls'),name='curso'),
+<<<<<<< HEAD
+    path('', include('Carga_Academica.urls'))
+=======
     path('docentes/',include('docentes.urls'),name='docentes'),
     path('',Home,name='home')
     
+>>>>>>> 94263f51f4cd1188d60c6a6ce49aeb74da9b4a0d
 ]
