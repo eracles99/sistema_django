@@ -1,0 +1,68 @@
+{% extends "./base.html" %}
+
+{% block title %} Gestión de Cargas Academicas {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Edicion de Carga Academica</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarCargaAcademica/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtCodigo" name="txtCodigo" value="{{cargaAcademica.Codigo}}" class="form-control" placeholder="Código"
+                            minlength="8" maxlength="8"  readonly required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtCarrera" name="txtCarrera" value="{{cargaAcademica.Carrera}}" class="form-control" placeholder="Carrera"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtDocente" name="txtDocente" value="{{cargaAcademica.Docente}}" class="form-control" placeholder="Docentes"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="numCreditos" name="numCreditos" value="{{cargaAcademica.Creditos}}" class="form-control" min="1" max="9"
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtTipo" name="txtTipo" value="{{cargaAcademica.Tipo}}" class="form-control" placeholder="Tipo"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtGpo" name="txtGpo" value="{{cargaAcademica.Gpo}}" class="form-control" placeholder="Gpo"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtHt" name="txtHt" value="{{cargaAcademica.Ht}}" class="form-control" placeholder="Ht"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtHp" name="txtHp" value="{{cargaAcademica.Hp}}" class="form-control" placeholder="Hp"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtDia" name="txtDia" value="{{cargaAcademica.Dia}}" class="form-control" placeholder="Dia"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtHorario" name="txtHorario" value="{{cargaAcademica.Horario}}" class="form-control" placeholder="Horario"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtAula" name="txtAula" value="{{cargaAcademica.Aula}}" class="form-control" placeholder="Aula"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtMatriculados" value="{{ca.Matriculados}}" name="txtMatriculados" class="form-control" placeholder="Matriculados"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
