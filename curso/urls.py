@@ -1,4 +1,4 @@
-from django.urls import path,re_path
+from django.urls import path
 from curso.views import crearCurso, editarCursoH, listarCurso,editarCurso,eliminarCurso,listarCursoH,crearCursoH,eliminarCursoH,mostrarNomCod
 urlpatterns = [
     path('crear_curso/',crearCurso,name='crear_curso'),
@@ -14,5 +14,4 @@ urlpatterns = [
     
     #--------------------------horario -curso---------------------------
     path('mostrarNomCod/<str:code>',mostrarNomCod,name='mostrarNomCod')
-    
 ]

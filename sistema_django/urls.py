@@ -24,8 +24,13 @@ from docentes.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('home/',Home.as_view(), name='home'),
+<<<<<<< HEAD
     path('home/',Home,name='home'),
     path('curso/',include('curso.urls'),name='curso'),
     path('docentes/',include('docentes.urls'),name='docentes'),
+=======
+    path('',Home,name='home'),
+    path('curso/',include('curso.urls'),name='curso')
+>>>>>>> papicha
     
 ]
