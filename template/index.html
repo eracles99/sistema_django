@@ -1,42 +1,69 @@
+{% load static %}
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'dashboard/css/stylos.css' %}">
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{% block titulo %}Home{% endblock titulo %}</title>
-        {% block extracss%}
-           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        {% endblock extracss%}
-    </head>
-    <body>
-      {% block body%}
-        <div>
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-              <a class="navbar-brand" href="{% url 'listar_curso'%}">Cursos</a>
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                  <a class="nav-link" href="{% url 'inicio'%}">Docentes <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="carga">Carga Academica</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-              </ul>
-              <form class="form-inline my-10 my-lg-0">
-                <input class="form-control mr-sm-5" type="search" placeholder="Search" aria-label="Search">
-                <!--button class="btn btn-outline-success my-0 my-sm-0" type="submit">Search</button>-->
-              </form>
-            </div>
-          </nav>
+  {% block extra_css %}
+  {% endblock extra_css %}
+  <script src="https://kit.fontawesome.com/a098a59c51.js" crossorigin="anonymous"></script>
+</head>
+<body id="body">
+  <header>
+    <div class="icon__menu">
+      <i class="fas fa-bars" id="btn_open"></i>
+    </div>
+  </header>
+  <div class='menu__side' id="menu_side" >
+
+    <div class="name__page">
+      <i class="far fa-user-circle"></i>
+      <div>Usuario</div>
+    </div>
+    
+    <div class="options__menu">
+      
+      <a href="#"  class='select'>
+        <div class="options" >
+          <i class="fas fa-home" title="Inicio"></i>
+          <h4>Inicio</h4>  
         </div>
-      {% endblock body%}
-    </body>
+      </a>
+
+      <a href="#">
+        <div class="options">
+          <i class="fas fa-user-tie" title="Docentes"></i>
+          <h4>Docentes</h4>  
+        </div>
+      </a>
+      <div>
+        <a href="{% url 'listar_curso'%}" >  
+          <div class="options">
+            <i class="fas fa-book" title="Cursos"></i>
+            <h4>Cursos</h4>  
+          </div>
+        </a>
+      </div>
+
+      <a href="#">  
+        <div class="options">
+          <i class="fas fa-file-signature" title="Carga Academica"></i>
+          <h4>Carga Academica</h4>  
+        </div>
+      </a>                          
+    </div>
+  </div>                                                        
+  {% block main %}
+   <main class="main col">
+      {%block div%}
+      
+      {%endblock div%}
+   </main>
+  {% endblock main %}
+  <script src="{% static 'dashboard/js/script.js' %}"></script>
+</body>
 </html>
