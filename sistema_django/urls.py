@@ -19,14 +19,14 @@ from django.urls import path
 
 from django.urls.conf import include
 
-from curso.views import Home
-from docentes.views import *
+#from curso.views import Home
+#from docentes.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('home/',Home.as_view(), name='home'),
-    path('curso/',include('curso.urls'),name='curso'),
-    path('carga/', include('Carga_Academica.urls'),name='carga'),
-    path('docentes/',include('docentes.urls'),name='docentes'),
-    path('',Home,name='home')
+    #path('curso/',include('curso.urls'),name='curso'),
+    #path('carga/', include('Carga_Academica.urls'),name='carga'),
+    #path('docentes/',include('docentes.urls'),name='docentes'),
+    #path('',Home,name='home')
     
 ]
