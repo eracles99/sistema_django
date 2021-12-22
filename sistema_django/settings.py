@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     #'rest_framework',
     'ControlSilabico',
     'sistema_django',
-    #'curso',
+    'ControlSilabico.curso',
     #'Carga_Academica',
     #'docentes',
 ]
@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'sistema_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bdsistema',
-        'USER': 'root',
-        'PASSWORD':'',
-        'HOST': 'localhost',
+        'NAME': 'bvxzku4jqpi5h93yqkrf',
+        'USER': 'upy42uypukqqpl2c',
+        'PASSWORD':'2StBffpYivierwHvqIil',
+        'HOST': 'bvxzku4jqpi5h93yqkrf-mysql.services.clever-cloud.com',
         'PORT':'3306',
         "OPTIONS": {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
@@ -98,8 +98,6 @@ DATABASES = {
         }
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 

@@ -1,18 +1,20 @@
 {% extends 'index.html' %}
 {% block titulo %} Creacion de autores {% endblock titulo %}
-{% block body %}
-  <form  Method="POST">
-     {% csrf_token %}
-     {% if error %}
-        <h2>{{ error }}</h2>
-     {% else %}
-        <div>
-           <div class="mx-auto" style="width: 200px;">Crear Nuevo Curso</div>
-        </div>
-        <p class="text-break"><h2 class=""></h2></p>
-        {{ curso_form.as_p }}
-        <button type="submit" class="btn btn-success">Guardar</button>
-     {% endif %}
-  </form>
-{% endblock body %}
+<body>
+ {% block div%}
+   <form  Method="POST">
+      {% csrf_token %}
+      {% if error %}
+         <h2>{{ error }}</h2>
+      {% else %}
+         <div>
+            <div class="mx-auto" style="width: 200px;">Crear Nuevo Curso</div>
+         </div>
+         <p class="text-break"><h2 class=""></h2></p>
+         {{ curso_form.as_p }}
+         <button type="submit" class="btn btn-success">Guardar</button>
+      {% endif %}
+   </form>
+ {% endblock div %}
+</body>
    
