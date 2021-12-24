@@ -2,7 +2,7 @@ from django.db.models.query import InstanceCheckMeta
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render,redirect
 from ControlSilabico.curso.froms import cursoForm
-from ControlSilabico.models import tcurso
+from ControlSilabico.models import Curso
 def Home(request):
     return render(request,'index.html')
 def crearCurso(request):
@@ -15,14 +15,14 @@ def crearCurso(request):
         curso_form=cursoForm()
         return render(request,'curso/crear_curso.html',{'curso_form':curso_form})
 def listarCurso(request):
-    cursos=tcurso.objects.all()
+    cursos=Curso.objects.all()
     return render(request,'curso/listar_curso.html',{'cursos':cursos})
 
-def editarCurso(request,codeC):
+def editarCurso(request,idcurso):
     curso_form=None
     error=None
     try:
-        curso1=tcurso.objects.get(codeC=codeC)
+        curso1=Curso.objects.get(idcurso=idcurso)
         if request.method == 'GET':
             curso_form=cursoForm(instance=curso1)
         else:
@@ -33,8 +33,8 @@ def editarCurso(request,codeC):
     except ObjectDoesNotExist as e:
         error=e 
     return render(request,'curso/crear_curso.html',{'curso_form':curso_form,"error":error})
-def eliminarCurso(request,codeC):
-    curso1=tcurso.objects.get(codeC=codeC)
+def eliminarCurso(request,idcurso):
+    curso1=Curso.objects.get(idcurso=idcurso)
     curso1.delete()
     return redirect('listar_curso')
 #-------------------------------funciones cursos-horarios--------------------------------

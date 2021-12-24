@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'sistema_django',
     'ControlSilabico.curso',
     #'Carga_Academica',
-    #'docentes',
+    'ControlSilabico.docente',
 ]
 
 MIDDLEWARE = [

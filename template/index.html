@@ -33,13 +33,14 @@
           <h4>Inicio</h4>  
         </div>
       </a>
-
-      <a href="#">
-        <div class="options">
-          <i class="fas fa-user-tie" title="Docentes"></i>
-          <h4>Docentes</h4>  
-        </div>
-      </a>
+      <div>
+        <a href="{% url 'listar_docente'%}">
+          <div class="options">
+            <i class="fas fa-user-tie" title="Docentes"></i>
+            <h4>Docentes</h4>  
+          </div>
+        </a>
+      </div>
       <div>
         <a href="{% url 'listar_curso'%}" >  
           <div class="options">

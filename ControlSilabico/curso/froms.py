@@ -4,8 +4,8 @@ from ControlSilabico.models import*
 class cursoForm(forms.ModelForm):
     
     class Meta:
-        model = tcurso
-        fields = ["codeC","name","credits","career","grupo"]
+        model = Curso
+        fields = ["idcurso","nombre","carrera","grupo","creditos","idcat_curso"]
         
 '''class M(forms.ModelForm):
     

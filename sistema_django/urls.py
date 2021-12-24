@@ -22,11 +22,11 @@ from django.urls.conf import include
 #from ControlSilabico.curso.views import Home
 #from docentes.views import *
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),    
     path('',Home.as_view(), name='home'),
     path('curso/',include('ControlSilabico.curso.urls'),name='curso'),
     #path('carga/', include('Carga_Academica.urls'),name='carga'),
-    #path('docentes/',include('docentes.urls'),name='docentes'),
+    path('docentes/',include('ControlSilabico.docente.urls'),name='docentes'),
     #path('',Home,name='home')
     
 ]
