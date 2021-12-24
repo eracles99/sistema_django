@@ -34,6 +34,9 @@ class Catdocente(models.Model):
     class Meta:
         managed = False
         db_table = 'catDocente'
+        ordering = ['idcategoria']
+    def __str__(self):
+        return self.idcategoria
 
 
 class Contenidosilabo(models.Model):
