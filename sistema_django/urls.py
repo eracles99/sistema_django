@@ -27,6 +27,7 @@ urlpatterns = [
     path('curso/',include('ControlSilabico.curso.urls'),name='curso'),
     #path('carga/', include('Carga_Academica.urls'),name='carga'),
     path('docentes/',include('ControlSilabico.docente.urls'),name='docentes'),
+    path('carga/',include('ControlSilabico.carga.urls'),name='carga'),
     #path('',Home,name='home')
     
 ]
