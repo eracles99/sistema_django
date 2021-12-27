@@ -29,12 +29,15 @@ def listar_cursos(request):
     finally:
         cursor.close()
 def asignar_carga(request,idCursoDetalle):
-    carga1= Cursodetalle.objects.filter(idcursodetalle=idCursoDetalle).first()
-    print(carga1)
-    return render(request,'carga/generar_carga.html',{'CursoDetalle':carga1})
+    #carga1= Cursodetalle.objects.filter(idcursodetalle=idCursoDetalle).first()
+    #print("************************",idCursoDetalle)
+
+    return render(request,'carga/generar_carga.html',{'CursoDetalle':idCursoDetalle})
 def asignando(request,idCursoDetalle):
     codeDetalle=idCursoDetalle
     codeDocente=request.POST['txtCodigo']
+
+    #print("==========",codeDetalle,codeDocente)
 
     carga=Carga.objects.create(iddocente=codeDocente , idcursodetalle=codeDetalle)
     return render(request,'carga/generar_carga.html')
