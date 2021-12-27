@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db.models.query import InstanceCheckMeta
 from django.core.exceptions import ObjectDoesNotExist
+from ControlSilabico.curso.froms import CursoDetallForm
 from ControlSilabico.models import *
 from ControlSilabico.carga.froms import *
 # Create your views here.
@@ -42,12 +43,17 @@ def asignando(request,idCursoDetalle):
 
 def asignar_carga(request,idCursoDetalle):
     print('****************',idCursoDetalle)
-    if request.method=='POST':
-        carga_form = cargaForm(initial={'idCursoDetalle': idCursoDetalle})
-        carga_form=cargaForm(request.POST)
-        if carga_form.is_valid():
-            carga_form.save()
-            return redirect('listar_curso') 
-    else:
-        carga_form=cargaForm()
-        return render(request,'carga/generar_carga.html',{'carga_form':carga_form})
+    carga_form=None
+    error=None
+    try:
+        if request.method=='POST':
+            carga_form = cargaForm(initial={'idCursoDetalle': idCursoDetalle})
+            carga_form=cargaForm(request.POST)
+            if carga_form.is_valid():
+                carga_form.save()
+                return redirect('listar_curso') 
+        else:
+            carga_form=cargaForm()
+    except ObjectDoesNotExist as e:
+        error=e 
+    return render(request,'carga/generar_carga.html',{'carga_form':carga_form})

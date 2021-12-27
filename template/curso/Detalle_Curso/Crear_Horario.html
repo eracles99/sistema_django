@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% block titulo %} Creacionde  Horarios y Detalles {% endblock titulo %}
+{% block div %}
+   {% csrf_token %}
+   {% if RecuCurso %}
+      <div class="container px-1">
+            <div class="row gx-3">
+               <div class="col-sm-5">
+                  <label for="name">Nombre</label>
+                  <label for="name">{{RecuCurso.idcurso}}</label>
+               </div>
+               <div class="col-sm-5">
+                  <label for="mail">Codigo</label>
+                  <label for="mail">{{RecuCurso.nombre}}</label>
+               </div>
+               <div class="col-sm-5">
+                  <label for="mail">Carrera</label>
+                  <label for="mail">{{RecuCurso.carrera}}</label>>
+               </div>
+            </div>
+      </div>
+   {% endif %}
+
+   <form  Method="POST">
+     {% csrf_token %}
+     {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+        <p class="text-break"><h2 class="">Crear Nuevo Curso Horario</h2></p>
+        {{ cursoDetalle_form.as_p }}
+        <button type="submit" class="btn btn-success">crear</button>
+      {% endif %}
+  </form>
+{% endblock div %}

@@ -64,6 +64,21 @@ def Detalle_Curso(request,idcurso):
             #shared =CursoDetalleO.objects.filter(id_idcurso=idc'CursoDetalleO':CursoDetalleOurso)
     return render(request,'curso/Detalle_Curso/Listar_Detalle.html',context={'consultas':result1,'CursoDetalleO':CursoDetalleO})
 
+def crear_horario(request,idcurso):
+    print('+++++++++++crear_horario')
+    if(request.method == 'POST'):
+        cursoDetalle_form=CursoDetallForm(request.POST)
+        horario_form=horarioForm(request.POST)
+        if cursoDetalle_form.is_valid() and horario_form.is_valid() :
+            cursoDetalle_form.save()
+            horario_form.save()
+            return redirect('listar_carga')
+    else:
+        horario_form=horarioForm()
+        cursoDetalle_form=CursoDetallForm()
+    RecuCurso=Curso.objects.get(idcurso=idcurso)
+    return render(request,'curso/Detalle_Curso/Crear_Horario.html',{'cursoDetalle_form':cursoDetalle_form,'horario_form':horario_form,'RecuCurso':RecuCurso})
+
 '''def listarCursoH(request):
     cursosH=CursosHorarios.objects.all()
     return render(request,'curso/cursoHorario/listar_cursoH.html',{'cursosH':cursosH})

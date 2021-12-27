@@ -2,19 +2,12 @@
 {% block div %}
     <h1> CURSOS DETALLES</h1>
     {% if CursoDetalleO %}
-        <tr>
-            <div class="mx-auto" style="width: 430px;">
-            <p class="text-break">
-                <h2 class="">Horarios</h2>
-            </p>
-            </div>
-        </tr>
         <form action="/my-handling-form-page" method="post"></form>
             <div class="container px-1">
                 <div class="row gx-3">
                     <div class="col-sm-5">
                         <label for="name">Nombre:</label>
-                        <label for="name">{{CursoDetalleO.idcurso}}:</label>
+                        <label for="name">{{CursoDetalleO.idcurso}}</label>
                     </div>
                     <div class="col-sm-5">
                         <label for="mail">Codigo:</label>
@@ -26,22 +19,21 @@
                     </div>
                 </div>
             </div>
-        
         </form>
+        <tr>
+            <div class="mx-auto" style="width: 430px;">
+            <p class="text-break">
+                <h2 class="">Horarios</h2>
+            </p>
+            </div>
+        </tr>
+        <a href="{% url 'crear_horario' CursoDetalleO.idcurso %}">
+            <button type="button" class="btn btn-dark">Nuevo Horario</button>
+        </a>
     {% endif %}
     {% if consultas%}
         <div class='main-container'>
-            <div>
-                <div class="mx-auto" style="width: 430px">
-                    <p class="text-break">
-                    <h2 class="">Horarios</h2>
-                    </p>
-                </div>
-            </div>
             <div class="row-sm-12">
-                <a href="{% url 'crear_curso'%}">
-                    <button type="button" class="btn btn-dark">Nuevo Horario</button>
-                </a>
                 <div class='col-sm-10'>
                 <table style='font-size: 17px' bourder="1" class="table  table-hover table-bordered " cellpadding="10" >
                     <thead>
@@ -70,6 +62,6 @@
             </div>
         </div>
     {% else %}
-        <h1>No existe cursos</h1>
+        <h1>NO HAY HORARIOS EN ESTE CURSO</h1>
     {% endif %}
-{%endblock div%}
+{% endblock div %}

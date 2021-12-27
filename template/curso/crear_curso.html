@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 {% block titulo %} Creacion de autores {% endblock titulo %}
 <body>
- {% block div%}
+{% block div%}
    <form  Method="POST">
       {% csrf_token %}
       {% if error %}
