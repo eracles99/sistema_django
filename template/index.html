@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="{% static 'dashboard/css/stylos.css' %}">
-  <!--link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}"-->
+  <!--rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}"-->
   {% block extra_css %}
   {% endblock extra_css %}
   <script src="https://kit.fontawesome.com/a098a59c51.js" crossorigin="anonymous"></script>
 </head>
-<body id="body">
+<body id="body">  
   <header>
     <div class="icon__menu">
       <i class="fas fa-bars" id="btn_open"></i>
@@ -42,7 +42,7 @@
         </a>
       </div>
       <div>
-        <a href="#" >  
+        <a href="{% url 'listar_curso' %}" >  
           <div class="options">
             <i class="fas fa-book" title="Cursos"></i>
             <h4>Cursos</h4>  

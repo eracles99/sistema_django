@@ -683,7 +683,7 @@ progress {
 }
 
 .row-cols-auto > * {
-  flex: 0 0 auto;
+  flex: r 0 auto;
   width: auto;
 }
 

@@ -2,20 +2,30 @@
 {%extends 'index.html'%}
 {% load static %}
 {% block extra_css %}
-
+<link rel="stylesheet" href="{% static 'dashboard/css/card.css' %}">
 {% endblock extra_css %}
 <body>
     {% block div %}
-  
-    <form  method="POST">{% csrf_token %}
-        <label for="uname">INGRESE CODIGO DOCENTE: </label>
-            <input type="text" id="txtCodigo" name="txtCodigo"
-           placeholder="Ejmplo D001">
-        
-        <div class="form-group">
-            <a href="{% url 'asignando' CursoDetalle  %}"> <button type="submit" class="btn btn-success btn-block text-white">Guardar</button></a>
+    <div class="card-container">
+        <div class="card">
+          <h1 class="center">GENERAR CARGA</h1> 
+          <div class="front">
+                <form  method="POST">{% csrf_token %}
+                    <p class="text-break"><h2 class=""></h2></p>
+                    {{ carga_form.as_p }}
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </form>
+          </div>
+          <div class="back">
+          </div>
         </div>
-    </form>
+    </div>
+
+    <!-- /.navbar-collapseform  method="POST">{% csrf_token %}
+         <p class="text-break"><h2 class=""></h2></p>
+         {{ carga_form.as_p }}
+         <button type="submit" class="btn btn-success">Guardar</button>
+    </form-->
   
     {% endblock div %}
 </body>

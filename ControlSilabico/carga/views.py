@@ -1,10 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db.models.query import InstanceCheckMeta
 from django.core.exceptions import ObjectDoesNotExist
-from ControlSilabico.models import Docente
-from ControlSilabico.models import Cursodetalle
-from ControlSilabico.models import Carga
-#from .forms import CargaForm
+from ControlSilabico.models import *
+from ControlSilabico.carga.froms import *
 # Create your views here.
 from django.db.models.query import InstanceCheckMeta
 
@@ -28,9 +26,9 @@ def listar_cursos(request):
         return render(request,'carga/cursos_disponibles.html',{'cursosd':resultado}) # con esto le mande al templetes
     finally:
         cursor.close()
-def asignar_carga(request,idCursoDetalle):
+def asignar_cargafail(request,idCursoDetalle):
     #carga1= Cursodetalle.objects.filter(idcursodetalle=idCursoDetalle).first()
-    #print("************************",idCursoDetalle)
+    print("************************",idCursoDetalle)
 
     return render(request,'carga/generar_carga.html',{'CursoDetalle':idCursoDetalle})
 def asignando(request,idCursoDetalle):
@@ -42,3 +40,14 @@ def asignando(request,idCursoDetalle):
     carga=Carga.objects.create(iddocente=codeDocente , idcursodetalle=codeDetalle)
     return render(request,'carga/generar_carga.html')
 
+def asignar_carga(request,idCursoDetalle):
+    print('****************',idCursoDetalle)
+    if request.method=='POST':
+        carga_form = cargaForm(initial={'idCursoDetalle': idCursoDetalle})
+        carga_form=cargaForm(request.POST)
+        if carga_form.is_valid():
+            carga_form.save()
+            return redirect('listar_curso') 
+    else:
+        carga_form=cargaForm()
+        return render(request,'carga/generar_carga.html',{'carga_form':carga_form})

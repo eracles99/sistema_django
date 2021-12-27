@@ -61,8 +61,8 @@ class Curso(models.Model):
     class Meta:
         managed = False
         db_table = 'curso'
-
-
+    def __str__(self):
+        return self.idcurso
 class Cursodetalle(models.Model):
     idcursodetalle = models.AutoField(db_column='idCursoDetalle', primary_key=True)  # Field name made lowercase.
     idcurso = models.ForeignKey(Curso, models.DO_NOTHING, db_column='idCurso')  # Field name made lowercase.
@@ -71,6 +71,8 @@ class Cursodetalle(models.Model):
     class Meta:
         managed = False
         db_table = 'cursoDetalle'
+    def __str__(self):
+        return str(self.idcursodetalle)
 
 
 class Dia(models.Model):
@@ -90,7 +92,8 @@ class Docente(models.Model):
     class Meta:
         managed = False
         db_table = 'docente'
-
+    def __str__(self):
+        return self.nombrecompleto
 
 class Horario(models.Model):
     idhorario = models.AutoField(db_column='idHorario', primary_key=True)  # Field name made lowercase.

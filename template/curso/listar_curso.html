@@ -7,7 +7,7 @@
 <body>
   {%block div%}
     {% if cursos%}
-        <div class='main-container'>
+        <div class='table-responsive-sm '>
             <div>
                 <div class="mx-auto" style="width: 430px">
                     <p class="text-break">
@@ -19,7 +19,7 @@
                 <a href="{% url 'crear_curso'%}">
                     <button type="button" class="btn btn-dark">Nuevo Curso</button>
                 </a>
-                <div class='col-sm-10'>
+                <div class='col-sm-7'>
                 <table style='font-size: 14px' bourder="1" class="table  table-hover table-bordered " cellpadding="10" >
                     <thead>
                     <tr>
