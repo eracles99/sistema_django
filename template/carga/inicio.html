@@ -1,0 +1,57 @@
+
+{%extends 'index.html'%}
+{% load static %}
+{% block extra_css %}
+
+{% endblock extra_css %}
+<body>
+    {% block div %}
+        <a href="{% url 'listar_cursosdisponibles' %}"><button type="button" class="btn btn-primary mt-1">CREAR CARGA</button></a>
+            <div class='container'>
+                <di class="row">
+                    <di class='col-md-'>
+                        <table border="1" class="table  table-hover table-bordered " cellpadding="10">
+                            <thead>
+                                <tr>
+                                    <th>codigo docente</th>
+                                    <th>DOCENTE</th>
+                                    <th>cod CURSO</th>
+                                    <th>CARRERA</th>
+                                    <th>CURSO</th>
+                                    <th>CREDITOS</th>
+                                    <th>TIPO</th>
+                                    <th>GRUPO</th>
+                                    <th>NOMBREDIA</th>
+                                    <th>hrI</th>
+                                    <th>hrF</th>
+                                    <th>aula</th>
+                                   
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for c in carga %}
+                                    <tr>
+                                        <td>{{c.0}}</td>
+                                        <td>{{c.1}}</td>
+                                        <td>{{c.2}}</td>
+                                        <td>{{c.3}}</td>
+                                        <td>{{c.4}}</td>
+                                        <td>{{c.5}}</td>
+                                        <td>{{c.6}}</td>
+                                        <td>{{c.7}}</td>
+                                        <td>{{c.8}}</td>
+                                        <td>{{c.9}}</td>
+                                        <td>{{c.10}}</td>
+                                        <td>{{c.11}}</td>
+                                        
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </di>
+                </di>
+            </div>
+        </a>
+    {% endblock div %}
+</body>

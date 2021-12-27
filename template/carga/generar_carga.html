@@ -1,0 +1,21 @@
+
+{%extends 'index.html'%}
+{% load static %}
+{% block extra_css %}
+
+{% endblock extra_css %}
+<body>
+    {% block div %}
+  
+    <form  method="POST">{% csrf_token %}
+        <label for="uname">INGRESE CODIGO DOCENTE: </label>
+            <input type="text" id="txtCodigo" name="txtCodigo"
+           placeholder="Ejmplo D001">
+        
+        <div class="form-group">
+            <a href="{% url 'asignando' CursoDetalle  %}"> <button type="submit" class="btn btn-success btn-block text-white">Guardar</button></a>
+        </div>
+    </form>
+  
+    {% endblock div %}
+</body>

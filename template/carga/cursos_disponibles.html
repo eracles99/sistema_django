@@ -1,0 +1,45 @@
+{%extends 'index.html'%}
+{% load static %}
+{% block extra_css %}
+
+{% endblock extra_css %}
+<body>
+    {% block div %}
+            <h1>LISTA DE CURSOS DISPONIBLES </h1>
+            <div class='container'>
+                <di class="row">
+                    <di class='col-md-'>
+                        <table border="1" class="table  table-hover table-bordered " cellpadding="10">
+                            <thead>
+                                <tr>
+                                    <th>idCursoDetalle</th>
+                                    <th>codigo curso</th>
+                                    <th>Curso</th>
+                                    <th>Tipo curso</th>
+                                    <th> </th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for c in cursosd %}
+                                    <tr>
+                                        <td>{{c.0}}</td>
+                                        <td>{{c.1}}</td>
+                                        <td>{{c.2}}</td>
+                                        <td>{{c.3}}</td>
+                                        
+                                        <td>
+                                            <a href="{% url 'asignar' c.0 %}"><button type="button" class="btn btn-success">asignar</button></a>
+                                            <a href="#"><button type="button" class="btn btn-danger"></button></a>
+                                        </td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </di>
+                </di>
+            </div>
+        </a>
+    {% endblock div %}
+</body>
