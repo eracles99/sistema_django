@@ -1,6 +1,12 @@
+
 from django import forms
 from django.db.models import fields
 from ControlSilabico.models import*
+
+class CursoDetallForm(forms.ModelForm):
+    class meta:
+        model=Cursodetalle
+        fields=['idcurso','idtipocurso']
 class cursoForm(forms.ModelForm):
     
     class Meta:

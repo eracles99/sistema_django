@@ -1,8 +1,13 @@
 from django.db.models.query import InstanceCheckMeta
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render,redirect
-from ControlSilabico.curso.froms import cursoForm
-from ControlSilabico.models import Curso
+from ControlSilabico.curso.froms import *
+from ControlSilabico.models import *
+from django.views.generic import CreateView
+from django.urls import reverse, reverse_lazy  
+    
+# Create your views here.
+
 def Home(request):
     return render(request,'index.html')
 def crearCurso(request):
@@ -37,7 +42,28 @@ def eliminarCurso(request,idcurso):
     curso1=Curso.objects.get(idcurso=idcurso)
     curso1.delete()
     return redirect('listar_curso')
+
+    
 #-------------------------------funciones cursos-horarios--------------------------------
+def Detalle_Curso(request,idcurso):
+    import  pymysql
+    #from django.db import co
+    conn = pymysql.connect(host='bvxzku4jqpi5h93yqkrf-mysql.services.clever-cloud.com', user='upy42uypukqqpl2c', password='2StBffpYivierwHvqIil', database='bvxzku4jqpi5h93yqkrf', charset='utf8')
+    cur = conn.cursor()
+    Args=(idcurso,)
+    cur.callproc('sp_HroPorCurso',Args)
+    conn.commit()
+    result = cur.fetchall()
+    result1=[]
+    #print('{0}   {1}   {2}   {3}   {4}   {5}   {6}   {7} '.format('id', 'tipo', 'ht', 'hp','dia','hrInicio','hrFin','Aula'))
+    for row in result:
+        result1.append(list(row))
+    conn.close()
+    if request.method == 'GET':
+            CursoDetalleO=Curso.objects.get(idcurso=idcurso)
+            #shared =CursoDetalleO.objects.filter(id_idcurso=idc'CursoDetalleO':CursoDetalleOurso)
+    return render(request,'curso/Detalle_Curso/Listar_Detalle.html',context={'consultas':result1,'CursoDetalleO':CursoDetalleO})
+
 '''def listarCursoH(request):
     cursosH=CursosHorarios.objects.all()
     return render(request,'curso/cursoHorario/listar_cursoH.html',{'cursosH':cursosH})

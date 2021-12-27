@@ -6,51 +6,55 @@
 
 <body>
   {%block div%}
-    <div>
-        <div class="mx-auto" style="width: 430px;">
-            <p class="text-break">
-            <h2 class="">LISTADO DE CURSOS</h2>
-            </p>
-        </div>
-    </div>
-    <a href="{% url 'crear_curso'%}">
-        <button type="button" class="btn btn-dark">Nuevo Curso</button>
-    </a>
     {% if cursos%}
-        <div class='container'>
-        <div class="row">
-            <div class='col-md-'>
-            <table bourder="1" class="table  table-hover table-bordered " cellpadding="10">
-                <thead>
-                <tr>
-                    <th>codigo </th>
-                    <th>nombre</th>
-                    <th>Escuela Profesional</th>
-                    <th>Grp</th>
-                    <th>cred</th>
-                    <th>Cat</th>
-                    <th>Opciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for curso1 in cursos%}
-                    <tr>
-                    <td>{{ curso1.idcurso }}</td>
-                    <td>{{ curso1.nombre }}</td>
-                    <td>{{ curso1.carrera }}</td>
-                    <td>{{ curso1.grupo }}</td>
-                    <td>{{ curso1.creditos }}</td>
-                    <td>{{ curso1.idcat_curso }}</td>
-                    <td>
-                        <a href="{% url 'editar_curso' curso1.idcurso %}"><button type="button" class="btn btn-success">Edit</button></a>
-                        <a href="{% url 'eliminar_curso' curso1.idcurso %} "><button type="button" class="btn btn-danger">Delete</button></a>
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <div class='main-container'>
+            <div>
+                <div class="mx-auto" style="width: 430px">
+                    <p class="text-break">
+                    <h2 class="">LISTADO DE CURSOS</h2>
+                    </p>
+                </div>
             </div>
-        </div>
+            <div class="row-sm-8">
+                <a href="{% url 'crear_curso'%}">
+                    <button type="button" class="btn btn-dark">Nuevo Curso</button>
+                </a>
+                <div class='col-sm-10'>
+                <table style='font-size: 14px' bourder="1" class="table  table-hover table-bordered " cellpadding="10" >
+                    <thead>
+                    <tr>
+                        <th>codigo </th>
+                        <th>nombre</th>
+                        <th>Escuela Profesional</th>
+                        <th>Grp</th>
+                        <th>cred</th>
+                        <th>Categoria</th>
+                        <th>Detalle</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for curso1 in cursos%}
+                        <tr>
+                            <td>{{ curso1.idcurso }}</td>
+                            <td>{{ curso1.nombre }}</td>
+                            <td>{{ curso1.carrera }}</td>
+                            <td>{{ curso1.grupo }}</td>
+                            <td>{{ curso1.creditos }}</td>
+                            <td>{{ curso1.idcat_curso }}</td>
+                            <td>
+                                <a href="{% url 'Detalle_Curso' curso1.idcurso %}"><button type="button" class="btn btn-success">Detalle</button></a>
+                            </td>
+                            <td>
+                                <a href="{% url 'editar_curso' curso1.idcurso %}"><button type="button" class="btn btn-success">Edit</button></a>
+                                <a href="{% url 'eliminar_curso' curso1.idcurso %} "><button type="button" class="btn btn-danger">Delete</button></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            </div>
         </div>
     {% else %}
         <h1>No existe cursos</h1>

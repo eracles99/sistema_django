@@ -7,7 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
 class Carga(models.Model):
     idcarga = models.AutoField(db_column='idCarga', primary_key=True)  # Field name made lowercase.
     iddocente = models.ForeignKey('Docente', models.DO_NOTHING, db_column='idDocente')  # Field name made lowercase.

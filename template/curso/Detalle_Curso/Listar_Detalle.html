@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% block div %}
+    <h1> CURSOS DETALLES</h1>
+    {% if CursoDetalleO %}
+        <tr>
+            <div class="mx-auto" style="width: 430px;">
+            <p class="text-break">
+                <h2 class="">Horarios</h2>
+            </p>
+            </div>
+        </tr>
+        <form action="/my-handling-form-page" method="post"></form>
+            <div class="container px-1">
+                <div class="row gx-3">
+                    <div class="col-sm-5">
+                        <label for="name">Nombre:</label>
+                        <label for="name">{{CursoDetalleO.idcurso}}:</label>
+                    </div>
+                    <div class="col-sm-5">
+                        <label for="mail">Codigo:</label>
+                        <label for="mail">{{CursoDetalleO.nombre}}</label>
+                    </div>
+                    <div class="col-sm-5">
+                        <label for="mail">Carrera:</label>
+                        <label for="mail">{{CursoDetalleO.carrera}}</label>>
+                    </div>
+                </div>
+            </div>
+        
+        </form>
+    {% endif %}
+    {% if consultas%}
+        <div class='main-container'>
+            <div>
+                <div class="mx-auto" style="width: 430px">
+                    <p class="text-break">
+                    <h2 class="">Horarios</h2>
+                    </p>
+                </div>
+            </div>
+            <div class="row-sm-12">
+                <a href="{% url 'crear_curso'%}">
+                    <button type="button" class="btn btn-dark">Nuevo Horario</button>
+                </a>
+                <div class='col-sm-10'>
+                <table style='font-size: 17px' bourder="1" class="table  table-hover table-bordered " cellpadding="10" >
+                    <thead>
+                    <tr>
+                        <th>codigo </th>
+                        <th>TIPO</th>
+                        <th>hTeorico Profesional</th>
+                        <th>HPractio</th>
+                        <th>Dia</th>
+                        <th>hrInicio</th>
+                        <th>hrFin</th>
+                        <th>hrFin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in consultas%}
+                        <tr>
+                            {%for i in item%}
+                                <td>{{ i }}</td>
+                            {%endfor%}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h1>No existe cursos</h1>
+    {% endif %}
+{%endblock div%}
