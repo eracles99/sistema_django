@@ -48,7 +48,7 @@ def eliminarCurso(request,idcurso):
 def Detalle_Curso(request,idcurso):
     import  pymysql
     #from django.db import co
-    conn = pymysql.connect(host='bvxzku4jqpi5h93yqkrf-mysql.services.clever-cloud.com', user='upy42uypukqqpl2c', password='2StBffpYivierwHvqIil', database='bvxzku4jqpi5h93yqkrf', charset='utf8')
+    conn = pymysql.connect(host='localhost', user='root', password='', database='dbsistema', charset='utf8mb4')
     cur = conn.cursor()
     Args=(idcurso,)
     cur.callproc('sp_HroPorCurso',Args)
@@ -61,8 +61,10 @@ def Detalle_Curso(request,idcurso):
     conn.close()
     if request.method == 'GET':
             CursoDetalleO=Curso.objects.get(idcurso=idcurso)
+            CursoDetalleFilter=Cursodetalle.objects.filter(idcurso_id=idcurso)
+            contexto={'consultas':result1,'CursoDetalleO':CursoDetalleO,'CursoDetFilter':CursoDetalleFilter}
             #shared =CursoDetalleO.objects.filter(id_idcurso=idc'CursoDetalleO':CursoDetalleOurso)
-    return render(request,'curso/Detalle_Curso/Listar_Detalle.html',context={'consultas':result1,'CursoDetalleO':CursoDetalleO})
+    return render(request,'curso/Detalle_Curso/Listar_Detalle.html',contexto)
 
 def crear_horario(request,idcurso):
     print('+++++++++++crear_horario')
@@ -78,6 +80,10 @@ def crear_horario(request,idcurso):
         cursoDetalle_form=CursoDetallForm()
     RecuCurso=Curso.objects.get(idcurso=idcurso)
     return render(request,'curso/Detalle_Curso/Crear_Horario.html',{'cursoDetalle_form':cursoDetalle_form,'horario_form':horario_form,'RecuCurso':RecuCurso})
+        
+        
+    
+    
 
 '''def listarCursoH(request):
     cursosH=CursosHorarios.objects.all()

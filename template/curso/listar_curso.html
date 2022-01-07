@@ -20,7 +20,7 @@
                     <button type="button" class="btn btn-dark">Nuevo Curso</button>
                 </a>
                 <div class='col-sm-7'>
-                <table style='font-size: 14px' bourder="1" class="table  table-hover table-bordered " cellpadding="10" >
+                <table style='font-size: 14px' border="1" class="table  table-hover table-bordered " cellpadding="10" >
                     <thead>
                     <tr>
                         <th>codigo </th>
@@ -41,7 +41,7 @@
                             <td>{{ curso1.carrera }}</td>
                             <td>{{ curso1.grupo }}</td>
                             <td>{{ curso1.creditos }}</td>
-                            <td>{{ curso1.idcat_curso }}</td>
+                            <td align="center">{{ curso1.idcat_curso }}</td>
                             <td>
                                 <a href="{% url 'Detalle_Curso' curso1.idcurso %}"><button type="button" class="btn btn-success">Detalle</button></a>
                             </td>
