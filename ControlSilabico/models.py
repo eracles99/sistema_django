@@ -128,3 +128,6 @@ class Tipocurso(models.Model):
     class Meta:
         managed = False
         db_table = 'tipoCurso'
+    def __str__(self):
+        return self.tipo
+        

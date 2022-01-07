@@ -1,68 +1,96 @@
 {% extends 'index.html' %}
 {% block div %}
-    <h1> CURSOS DETALLES</h1>
+    <h1> CURSO</h1>
     {% if CursoDetalleO %}
-        <tr>
-            <div class="mx-auto" style="width: 430px;">
-            <p class="text-break">
-                <h2 class="">Horarios</h2>
-            </p>
-            </div>
-        </tr>
         <form action="/my-handling-form-page" method="post"></form>
             <div class="container px-1">
                 <div class="row gx-3">
                     <div class="col-sm-5">
-                        <label for="name">Nombre:</label>
-                        <label for="name">{{CursoDetalleO.idcurso}}:</label>
+                        <label for="name">Codigo:</label>
+                        <label for="name">{{CursoDetalleO.idcurso}}</label>
                     </div>
                     <div class="col-sm-5">
-                        <label for="mail">Codigo:</label>
+                        <label for="mail">Nombre:</label>
                         <label for="mail">{{CursoDetalleO.nombre}}</label>
                     </div>
                     <div class="col-sm-5">
                         <label for="mail">Carrera:</label>
-                        <label for="mail">{{CursoDetalleO.carrera}}</label>>
+                        <label for="mail">{{CursoDetalleO.carrera}}</label>
                     </div>
                 </div>
             </div>
-        
         </form>
+                  
+        </div>
     {% endif %}
+    <div>
+        <div class="mx-auto" style="width: 430px;">
+        <p class="text-break">
+            <h2 class="">Tipo Curso</h2>
+        </p>
+        </div>
+        {% if CursoDetFilter %}
+            <table border='4'>
+                <thead>
+                    <tr>
+                        <tH>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in CursoDetFilter %}
+                        <tr>
+                            <td>{{i.idtipocurso}}</td>
+                            <td>
+                                <a href="#"><button>crear Horario</button></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+          <h2>¡¡No existe Tipos de cursos!!</h2>
+        {% endif %}
+    </div>
+    <div>
+        <a href="{% url 'crear_horario' CursoDetalleO.idcurso %}">
+            <button type="button" class="btn btn-dark">Crear Tipo</button>
+        </a>
+    </div>
     {% if consultas%}
         <div class='main-container'>
-            <div>
-                <div class="mx-auto" style="width: 430px">
-                    <p class="text-break">
-                    <h2 class="">Horarios</h2>
-                    </p>
-                </div>
-            </div>
             <div class="row-sm-12">
-                <a href="{% url 'crear_curso'%}">
-                    <button type="button" class="btn btn-dark">Nuevo Horario</button>
-                </a>
                 <div class='col-sm-10'>
-                <table style='font-size: 17px' bourder="1" class="table  table-hover table-bordered " cellpadding="10" >
+                <table style='font-size: 17px' border="1" class="table  table-hover table-bordered " cellpadding="10" >
                     <thead>
                     <tr>
                         <th>codigo </th>
                         <th>TIPO</th>
-                        <th>hTeorico Profesional</th>
+                        <th>hTeorico</th>
                         <th>HPractio</th>
                         <th>Dia</th>
                         <th>hrInicio</th>
                         <th>hrFin</th>
                         <th>hrFin</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for item in consultas%}
                         <tr>
+                            <td>{{item.0}}</td>
+                            <td>{{item.1}}</td>
+                            <td>{{item.2}}</td>
+                            <td>{{item.3}}</td>
+                            <td>{{item.4}}</td>
+                            <td>{{item.5}}</td>
+                            <td>{{item.6}}</td>
+                            <td>{{item.7}}</td>
+                        </tr>
+                        <!--tr>
                             {%for i in item%}
                                 <td>{{ i }}</td>
                             {%endfor%}
-                        </tr>
+                        </tr-->
                     {% endfor %}
                     </tbody>
                 </table>
@@ -70,6 +98,6 @@
             </div>
         </div>
     {% else %}
-        <h1>No existe cursos</h1>
+        <h4>NO HAY HORARIOS EN ESTE CURSO</h4   >
     {% endif %}
-{%endblock div%}
+{% endblock div %}
