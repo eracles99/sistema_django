@@ -3,7 +3,11 @@ from django.forms import ModelForm
 from django.db.models import fields
 from ControlSilabico.models import*
 
-class cargaForm(ModelForm):
+class cargaForm(forms.ModelForm):
     class Meta:
         model=Carga
         fields=['idcarga','iddocente','idcursodetalle']
+        
+'''class UploadFileForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    file = forms.FileField()#'''

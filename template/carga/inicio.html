@@ -6,52 +6,62 @@
 {% endblock extra_css %}
 <body>
     {% block div %}
-        <a href="{% url 'listar_cursosdisponibles' %}"><button type="button" class="btn btn-primary mt-1">CREAR CARGA</button></a>
-            <div class='container'>
-                <di class="row">
-                    <di class='col-md-'>
-                        <table border="1" class="table  table-hover table-bordered " cellpadding="10">
-                            <thead>
+        <div>
+            <center><h1>CARGA ACADEMICA</h1></center>
+        </div>
+        <div class='coln' >
+            <a href="{% url 'listar_cursosdisponibles' %}"><button type="button" class="btn btn-primary mt-1">CREAR CARGA</button></a>
+    
+            <form action="{% url 'listar_carga' %}" method="post" enctype="multipart/form-data" >
+                {% csrf_token %} 
+                <div class='coln'>
+                    <input type="file"  name='file'>  
+                    <input type="submit" value='Importar'/>
+                </div>
+            </form>
+        </div>
+        <div class='container'>
+            <div class="row">
+                <div class='col-md-'>
+                    <table style='font-size: 13px' border="1" class="table  table-hover table-bordered " cellpaddivng="10" >
+                        <thead>
+                            <tr>
+                                <th>CODIGO CURSO</th>
+                                <th>CARRERA</th>
+                                <th>DOCENTE</th>
+                                <th>CREDITO</th>
+                                <th>TIPO</th>
+                                <th>GRUPO</th>
+                                <th>HT</th>
+                                <th>HP</th>
+                                <th>DIA</th>
+                                <th>HR-INICIO</th>
+                                <th>HR-FIN</th>
+                                <th>AULA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for c in carga %}
                                 <tr>
-                                    <th>codigo docente</th>
-                                    <th>DOCENTE</th>
-                                    <th>cod CURSO</th>
-                                    <th>CARRERA</th>
-                                    <th>CURSO</th>
-                                    <th>CREDITOS</th>
-                                    <th>TIPO</th>
-                                    <th>GRUPO</th>
-                                    <th>NOMBREDIA</th>
-                                    <th>hrI</th>
-                                    <th>hrF</th>
-                                    <th>aula</th>
-                                   
-                                
+                                    <td>{{c.0}}</td>
+                                    <td>{{c.1}}</td>
+                                    <td>{{c.2}}</td>
+                                    <td>{{c.3}}</td>
+                                    <td>{{c.4}}</td>
+                                    <td>{{c.5}}</td>
+                                    <td>{{c.6}}</td>
+                                    <td>{{c.7}}</td>
+                                    <td>{{c.8}}</td>
+                                    <td>{{c.9}}</td>
+                                    <td>{{c.10}}</td>
+                                    <td>{{c.11}}</td>
+                                    
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {% for c in carga %}
-                                    <tr>
-                                        <td>{{c.0}}</td>
-                                        <td>{{c.1}}</td>
-                                        <td>{{c.2}}</td>
-                                        <td>{{c.3}}</td>
-                                        <td>{{c.4}}</td>
-                                        <td>{{c.5}}</td>
-                                        <td>{{c.6}}</td>
-                                        <td>{{c.7}}</td>
-                                        <td>{{c.8}}</td>
-                                        <td>{{c.9}}</td>
-                                        <td>{{c.10}}</td>
-                                        <td>{{c.11}}</td>
-                                        
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </di>
-                </di>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </a>
+        </div>
     {% endblock div %}
 </body>

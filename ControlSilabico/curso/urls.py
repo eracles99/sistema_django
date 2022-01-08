@@ -9,4 +9,5 @@ urlpatterns=[
     path('eliminar_curso/<str:idcurso>',eliminarCurso,name='eliminar_curso'),
     #----------------------------Detalle cursos----------------------
     path('Detalle_Curso/<str:idcurso>',Detalle_Curso,name='Detalle_Curso'),
+    path('crear_horario/<str:idcurso>',crear_horario,name='crear_horario'),
 ]

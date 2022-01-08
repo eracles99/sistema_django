@@ -16,18 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from sistema_django.views import Home
-
+from django.conf.urls.static import static
+from django.conf  import settings
 from django.urls.conf import include
 
 #from ControlSilabico.curso.views import Home
 #from docentes.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),    
-    path('',Home.as_view(), name='home'),
+    path(' ',Home.as_view(), name='home'),
     path('curso/',include('ControlSilabico.curso.urls'),name='curso'),
     #path('carga/', include('Carga_Academica.urls'),name='carga'),
     path('docentes/',include('ControlSilabico.docente.urls'),name='docentes'),
     path('carga/',include('ControlSilabico.carga.urls'),name='carga'),
     #path('',Home,name='home')
     
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

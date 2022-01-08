@@ -5,7 +5,9 @@
 <link rel="stylesheet" href="{% static 'dashboard/css/card.css' %}">
 {% endblock extra_css %}
 <body>
+
     {% block div %}
+    {% if carga_form %}
     <div class="card-container">
         <div class="card">
           <h1 class="center">GENERAR CARGA</h1> 
@@ -20,6 +22,9 @@
           </div>
         </div>
     </div>
+    {% else %}
+        <h1> curso cargado previamente</h1>
+    {% endif %}
 
     <!-- /.navbar-collapseform  method="POST">{% csrf_token %}
          <p class="text-break"><h2 class=""></h2></p>

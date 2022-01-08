@@ -4,14 +4,18 @@ from django.db.models import fields
 from ControlSilabico.models import*
 
 class CursoDetallForm(forms.ModelForm):
-    class meta:
+    class Meta:
         model=Cursodetalle
-        fields=['idcurso','idtipocurso']
+        fields=['idcursodetalle','idcurso','idtipocurso']
 class cursoForm(forms.ModelForm):
     
     class Meta:
         model = Curso
         fields = ["idcurso","nombre","carrera","grupo","creditos","idcat_curso"]
+class horarioForm(forms.ModelForm):
+    class Meta:
+        model=Horario
+        fields=['idhorario','ht','hp','dia_idd','hrinicio','hrfin','aula','idcursodetalle']
         
 '''class M(forms.ModelForm):
     

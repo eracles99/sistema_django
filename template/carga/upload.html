@@ -1,0 +1,8 @@
+{% extends 'index.html'%}
+{% block div %} 
+    <form method="POST" action='' enctype="multipart/form-data" >  
+        {% csrf_token %}  
+        <input type="file"  name='myFile'>  
+        <button type="submit" name='submit'>Subir</button></a>
+    </form> 
+{% endblock div%} 
