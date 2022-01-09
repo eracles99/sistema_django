@@ -15,7 +15,7 @@ class cursoForm(forms.ModelForm):
 class horarioForm(forms.ModelForm):
     class Meta:
         model=Horario
-        fields=['idhorario','ht','hp','dia_idd','hrinicio','hrfin','aula','idcursodetalle']
+        fields=['idhorario','ht','hp','idd','hrinicio','hrfin','aula','idcursodetalle']
         
 '''class M(forms.ModelForm):
     
