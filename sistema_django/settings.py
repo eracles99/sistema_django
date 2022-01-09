@@ -105,7 +105,7 @@ WSGI_APPLICATION = 'sistema_django.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbsistema',
+        'NAME': 'dbsilabos',
         'USER': 'root',
         'PASSWORD':'',
         'HOST': 'localhost',
