@@ -1,0 +1,510 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema bvxzku4jqpi5h93yqkrf
+-- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `bvxzku4jqpi5h93yqkrf` ;
+
+-- -----------------------------------------------------
+-- Schema bvxzku4jqpi5h93yqkrf
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `bvxzku4jqpi5h93yqkrf` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin ;
+USE `bvxzku4jqpi5h93yqkrf` ;
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`catdocente`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`catdocente` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`catdocente` (
+  `idCategoria` VARCHAR(6) NOT NULL,
+  PRIMARY KEY (`idCategoria`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`docente`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`docente` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`docente` (
+  `idDocente` VARCHAR(10) NOT NULL,
+  `nombreCompleto` VARCHAR(100) NOT NULL,
+  `correo` VARCHAR(100) NULL DEFAULT NULL,
+  `idCategoria` VARCHAR(6) NOT NULL,
+  PRIMARY KEY (`idDocente`),
+  INDEX `fk_docente_categoria1_idx` (`idCategoria` ASC) ,
+  CONSTRAINT `fk_docente_categoria1`
+    FOREIGN KEY (`idCategoria`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`catdocente` (`idCategoria`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`catcurso`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`catcurso` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`catcurso` (
+  `idcat_curso` VARCHAR(5) NOT NULL,
+  PRIMARY KEY (`idcat_curso`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`curso`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`curso` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`curso` (
+  `idCurso` VARCHAR(10) NOT NULL,
+  `nombre` VARCHAR(100) NOT NULL,
+  `carrera` VARCHAR(45) NOT NULL,
+  `grupo` VARCHAR(1) NOT NULL,
+  `creditos` VARCHAR(2) NOT NULL,
+  `idcat_curso` VARCHAR(5) NULL DEFAULT NULL,
+  PRIMARY KEY (`idCurso`),
+  INDEX `fk_curso_cat_curso1_idx` (`idcat_curso` ASC) ,
+  CONSTRAINT `fk_curso_cat_curso1`
+    FOREIGN KEY (`idcat_curso`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`catcurso` (`idcat_curso`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`tipocurso`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`tipocurso` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`tipocurso` (
+  `idtipoCurso` VARCHAR(10) NOT NULL,
+  `tipo` VARCHAR(10) NULL DEFAULT NULL,
+  PRIMARY KEY (`idtipoCurso`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`cursodetalle`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`cursodetalle` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`cursodetalle` (
+  `idCursoDetalle` INT(11) NOT NULL AUTO_INCREMENT,
+  `idCurso` VARCHAR(10) NOT NULL,
+  `idtipoCurso` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`idCursoDetalle`),
+  INDEX `fk_cursoDetalle_curso1_idx` (`idCurso` ASC) ,
+  INDEX `fk_cursoDetalle_tipoCurso1_idx` (`idtipoCurso` ASC) ,
+  CONSTRAINT `fk_cursoDetalle_curso1`
+    FOREIGN KEY (`idCurso`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`curso` (`idCurso`),
+  CONSTRAINT `fk_cursoDetalle_tipoCurso1`
+    FOREIGN KEY (`idtipoCurso`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`tipocurso` (`idtipoCurso`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`dia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`dia` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`dia` (
+  `idD` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`idD`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`horario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`horario` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`horario` (
+  `idHorario` INT(11) NOT NULL AUTO_INCREMENT,
+  `hT` INT(2) NOT NULL,
+  `hP` INT(2) NOT NULL,
+  `dia_idD` VARCHAR(10) NOT NULL,
+  `hrInicio` VARCHAR(2) NOT NULL,
+  `hrFin` VARCHAR(2) NOT NULL,
+  `Aula` VARCHAR(10) NULL DEFAULT NULL,
+  `idCursoDetalle` INT(11) NOT NULL,
+  PRIMARY KEY (`idHorario`),
+  INDEX `fk_horario_cursoDetalle1_idx` (`idCursoDetalle` ASC) ,
+  INDEX `fk_horario_dia1_idx` (`dia_idD` ASC) ,
+  CONSTRAINT `fk_horario_cursoDetalle1`
+    FOREIGN KEY (`idCursoDetalle`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`cursodetalle` (`idCursoDetalle`),
+  CONSTRAINT `fk_horario_dia1`
+    FOREIGN KEY (`dia_idD`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`dia` (`idD`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`carga`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`carga` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`carga` (
+  `idCarga` INT(11) NOT NULL AUTO_INCREMENT,
+  `idDocente` VARCHAR(10) NOT NULL,
+  `idHorario` INT(11) NOT NULL,
+  PRIMARY KEY (`idCarga`),
+  INDEX `fk_carga_docente1_idx` (`idDocente` ASC) ,
+  INDEX `fk_carga_horario1_idx` (`idHorario` ASC) ,
+  CONSTRAINT `fk_carga_docente1`
+    FOREIGN KEY (`idDocente`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`docente` (`idDocente`),
+  CONSTRAINT `fk_carga_horario1`
+    FOREIGN KEY (`idHorario`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`horario` (`idHorario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`contenidosilabo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`contenidosilabo` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`contenidosilabo` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `unidad` VARCHAR(5) NOT NULL,
+  `capitulo` VARCHAR(6) NOT NULL,
+  `tema` VARCHAR(45) NOT NULL,
+  `nroHoras` VARCHAR(2) NOT NULL,
+  `idCarga` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_ContenidoSilabo_carga1_idx` (`idCarga` ASC) ,
+  CONSTRAINT `fk_ContenidoSilabo_carga1`
+    FOREIGN KEY (`idCarga`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`carga` (`idCarga`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`registroavance`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`registroavance` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`registroavance` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `fecha` DATE NOT NULL,
+  `tema` VARCHAR(100) NOT NULL,
+  `horas` INT(11) NOT NULL,
+  `contenidoSilabo_id` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_registroAvance_contenidoSilabo1_idx` (`contenidoSilabo_id` ASC) ,
+  CONSTRAINT `fk_registroAvance_contenidoSilabo1`
+    FOREIGN KEY (`contenidoSilabo_id`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`contenidosilabo` (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`typeuser`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`typeuser` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`typeuser` (
+  `type` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`type`),
+  UNIQUE INDEX `type_UNIQUE` (`type` ASC) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `bvxzku4jqpi5h93yqkrf`.`users`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`users` ;
+
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`users` (
+  `idUser` INT(11) NOT NULL AUTO_INCREMENT,
+  `docente_idDocente` VARCHAR(10) NOT NULL,
+  `password` VARCHAR(8) NOT NULL,
+  `User_type` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`idUser`),
+  INDEX `fk_users_docente1_idx` (`docente_idDocente` ASC) ,
+  INDEX `fk_users_typeUser1_idx` (`User_type` ASC) ,
+  CONSTRAINT `fk_users_docente1`
+    FOREIGN KEY (`docente_idDocente`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`docente` (`idDocente`),
+  CONSTRAINT `fk_users_typeUser1`
+    FOREIGN KEY (`User_type`)
+    REFERENCES `bvxzku4jqpi5h93yqkrf`.`typeuser` (`type`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+USE `bvxzku4jqpi5h93yqkrf` ;
+
+-- -----------------------------------------------------
+-- Placeholder table for view `bvxzku4jqpi5h93yqkrf`.`vcargadocente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`vcargadocente` (`idCurso` INT, `carrera` INT, `nombreCompleto` INT, `creditos` INT, `idtipoCurso` INT, `grupo` INT, `hT` INT, `hP` INT, `dia_idD` INT, `hrInicio` INT, `hrFin` INT, `Aula` INT);
+
+-- -----------------------------------------------------
+-- Placeholder table for view `bvxzku4jqpi5h93yqkrf`.`vcursosdisponibles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bvxzku4jqpi5h93yqkrf`.`vcursosdisponibles` (`idHorario` INT, `hT` INT, `hP` INT, `dia_idD` INT, `hrInicio` INT, `hrFin` INT, `Aula` INT);
+
+-- -----------------------------------------------------
+-- function RecuIDDocen
+-- -----------------------------------------------------
+
+USE `bvxzku4jqpi5h93yqkrf`;
+DROP function IF EXISTS `bvxzku4jqpi5h93yqkrf`.`RecuIDDocen`;
+
+DELIMITER $$
+USE `bvxzku4jqpi5h93yqkrf`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `RecuIDDocen`(nombreDoc varchar(100)) RETURNS varchar(10) CHARSET utf8mb4 COLLATE utf8mb4_bin
+begin
+	declare idDoc varchar(10);
+	select (docente.idDocente) into idDoc from docente where  nombreCompleto=nombreDoc;
+	return idDoc;
+end$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- function RecuIDHorario
+-- -----------------------------------------------------
+
+USE `bvxzku4jqpi5h93yqkrf`;
+DROP function IF EXISTS `bvxzku4jqpi5h93yqkrf`.`RecuIDHorario`;
+
+DELIMITER $$
+USE `bvxzku4jqpi5h93yqkrf`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `RecuIDHorario`(tipocurso varchar(10),HT varchar(2),HP varchar(2),codeCurso varchar(10),idDetallecur int(11),dia1 varchar(10),hrI varchar(2),hrF varchar (2),AULA varchar(10) ) RETURNS int(11)
+BEGIN
+	declare idhorario int;
+	select (horario.idHorario)into idhorario from horario inner join cursodetalle as cud on cud.idCursoDetalle=horario.idCursoDetalle 
+			where (hT =HT and hP=HP and dia_idD=dia1 and hrInicio=hrI and hrFin=hrF and  Aula=AULA and cud.idCursoDetalle=(select RecuIdDetalle(codeCurso,tipocurso)));
+	/*if idhorario is NULL
+		then
+		return 0;
+	else
+		return idhorario;
+	end if*/
+    return idhorario;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- function RecuIdDetalle
+-- -----------------------------------------------------
+
+USE `bvxzku4jqpi5h93yqkrf`;
+DROP function IF EXISTS `bvxzku4jqpi5h93yqkrf`.`RecuIdDetalle`;
+
+DELIMITER $$
+USE `bvxzku4jqpi5h93yqkrf`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `RecuIdDetalle`(codeCurso varchar(10),tipocurso varchar(10)) RETURNS int(11)
+begin
+	declare idDetalle int;
+    select (cursodetalle.idCursoDetalle) into idDetalle  from cursodetalle where idCurso=codeCurso and idtipoCurso=tipocurso;
+    return  idDetalle;
+end$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- function RecuidHorarioUltimo
+-- -----------------------------------------------------
+
+USE `bvxzku4jqpi5h93yqkrf`;
+DROP function IF EXISTS `bvxzku4jqpi5h93yqkrf`.`RecuidHorarioUltimo`;
+
+DELIMITER $$
+USE `bvxzku4jqpi5h93yqkrf`$$
+CREATE DEFINER=`root`@`localhost` FUNCTION `RecuidHorarioUltimo`() RETURNS int(11)
+BEGIN
+	declare idHoUltimo int ;
+    select max(idHorario) into idHoUltimo from horario ;
+	RETURN idHoUltimo;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure sp_HroPorCurso
+-- -----------------------------------------------------
+
+USE `bvxzku4jqpi5h93yqkrf`;
+DROP procedure IF EXISTS `bvxzku4jqpi5h93yqkrf`.`sp_HroPorCurso`;
+
+DELIMITER $$
+USE `bvxzku4jqpi5h93yqkrf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_HroPorCurso`( in codeCurso varchar(10))
+BEGIN
+	select cd.idCursoDetalle,idtipoCurso,hT,hP,dia_idD,hrInicio,hrFin,Aula from cursodetalle as cd inner join horario as h on cd.idCursoDetalle=h.idCursoDetalle where idCurso=codeCurso;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure sp_migraDia
+-- -----------------------------------------------------
+
+USE `bvxzku4jqpi5h93yqkrf`;
+DROP procedure IF EXISTS `bvxzku4jqpi5h93yqkrf`.`sp_migraDia`;
+
+DELIMITER $$
+USE `bvxzku4jqpi5h93yqkrf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_migraDia`(in dia1 varchar(10))
+BEGIN
+	if not exists(select * from dia where idD=dia1)
+		then
+			insert into dia(idD)
+			value
+				(dia1);
+	end if;
+		
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure sp_migracionDocente
+-- -----------------------------------------------------
+
+USE `bvxzku4jqpi5h93yqkrf`;
+DROP procedure IF EXISTS `bvxzku4jqpi5h93yqkrf`.`sp_migracionDocente`;
+
+DELIMITER $$
+USE `bvxzku4jqpi5h93yqkrf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_migracionDocente`(in CatDocen varchar(6),in nombreDoc varchar(100) )
+BEGIN
+	#insertt
+    IF NOT EXISTS (SELECT * FROM catDocente WHERE idCategoria=CatDocen)
+		then
+			Insert into catDocente(idCategoria)
+			value
+				(CatDocen);
+	end if;
+	if NOT EXISTS (SELECT * FROM docente WHERE nombreCompleto=nombreDoc)
+		then
+			Insert into docente(nombreCompleto,correo,idCategoria)
+			value
+				(nombreDoc,'',CatDocen);
+	end if;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure sp_migracion_masiva
+-- -----------------------------------------------------
+
+USE `bvxzku4jqpi5h93yqkrf`;
+DROP procedure IF EXISTS `bvxzku4jqpi5h93yqkrf`.`sp_migracion_masiva`;
+
+DELIMITER $$
+USE `bvxzku4jqpi5h93yqkrf`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_migracion_masiva`(in nombreDoc varchar(100),in tipocurso varchar(10),in codeCurso varchar(10),in nombre varchar(100),in carrera varchar(45),in Grupo varchar(1),in creditos varchar(2),
+																in HT int(11),in HP int(11) ,in dia1 varchar(10),in HrInicio varchar(2), in HrFin varchar(2),in AULA varchar(10))
+BEGIN
+	if not exists( select * from tipocurso where idtipoCurso=tipocurso)
+		then
+			insert into tipocurso(idtipoCurso,tipo)
+			value
+				(tipocurso,'');
+	end if;
+	#---------------insert TABLE CURSO------------------------
+    if not exists (select * from curso where idCurso = codeCurso)
+		then
+			insert into curso(idCurso,nombre,carrera,grupo,creditos,idcat_curso)
+            value
+				(codeCurso,nombre,carrera,Grupo,creditos,'---');
+	end if;
+    if not exists (select * from cursodetalle where (idCurso=codeCurso and  idtipoCurso=tipocurso))
+		then 
+			insert into cursodetalle(idCurso,idtipoCurso)
+            value
+				(codeCurso,tipocurso);
+			#--------------------------------------------------------------------------
+			insert into horario( hT, hP, dia_idD, hrInicio, hrFin, Aula, idCursoDetalle)
+            value
+				(HT,HP,dia1,HrInicio,HrFin,AULA,(select RecuIdDetalle(codeCurso,tipocurso)));
+			#---------------------------------------------------------------------------------------
+            insert into carga(idDocente,idHorario)
+				values
+					((select RecuIDDocen(nombreDoc)),(select RecuIDHorario(tipocurso,HT,HP,codeCurso,(select RecuIdDetalle(codeCurso,tipocurso)),dia1,HrInicio,HrFin,AULA)));
+	else
+		if not exists(select *from horario inner join cursodetalle as cud on cud.idCursoDetalle=horario.idCursoDetalle where(hT = HT  and hP=HP and cud.idtipoCurso=tipocurso and dia_idD=dia1 and hrInicio=HrInicio and hrFin=HrFin and  Aula=AULA  and cud.idCursoDetalle=(select RecuIdDetalle(codeCurso,tipocurso))))
+                then
+					insert into horario( hT, hP, dia_idD, hrInicio, hrFin, Aula, idCursoDetalle)
+					value
+						(HT,HP,dia1,HrInicio,HrFin,AULA,(select RecuIdDetalle(codeCurso,tipocurso)));
+		end if;
+        if not exists(select *from carga where(idDocente=(select RecuIDDocen(nombreDoc)) and idHorario=(select RecuIDHorario(tipocurso,HT,HP,codeCurso,(select RecuIdDetalle(codeCurso,tipocurso)),dia1,HrInicio,HrFin,AULA))))
+				then 
+					insert into carga(idDocente,idHorario)
+					values
+						((select RecuIDDocen(nombreDoc)),(select RecuIDHorario(tipocurso,HT,HP,codeCurso,(select RecuIdDetalle(codeCurso,tipocurso)),dia1,HrInicio,HrFin,AULA)));
+		end if;
+	end if;
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- View `bvxzku4jqpi5h93yqkrf`.`vcargadocente`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`vcargadocente`;
+DROP VIEW IF EXISTS `bvxzku4jqpi5h93yqkrf`.`vcargadocente` ;
+USE `bvxzku4jqpi5h93yqkrf`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bvxzku4jqpi5h93yqkrf`.`vcargadocente` AS select `bvxzku4jqpi5h93yqkrf`.`curso`.`idCurso` AS `idCurso`,`bvxzku4jqpi5h93yqkrf`.`curso`.`carrera` AS `carrera`,`d`.`nombreCompleto` AS `nombreCompleto`,`bvxzku4jqpi5h93yqkrf`.`curso`.`creditos` AS `creditos`,`cd`.`idtipoCurso` AS `idtipoCurso`,`bvxzku4jqpi5h93yqkrf`.`curso`.`grupo` AS `grupo`,`h`.`hT` AS `hT`,`h`.`hP` AS `hP`,`h`.`dia_idD` AS `dia_idD`,`h`.`hrInicio` AS `hrInicio`,`h`.`hrFin` AS `hrFin`,`h`.`Aula` AS `Aula` from ((((`bvxzku4jqpi5h93yqkrf`.`docente` `d` join `bvxzku4jqpi5h93yqkrf`.`carga` `c` on(`d`.`idDocente` = `c`.`idDocente`)) join `bvxzku4jqpi5h93yqkrf`.`horario` `h` on(`h`.`idHorario` = `c`.`idHorario`)) join `bvxzku4jqpi5h93yqkrf`.`cursodetalle` `cd` on(`cd`.`idCursoDetalle` = `h`.`idCursoDetalle`)) join `bvxzku4jqpi5h93yqkrf`.`curso` on(`bvxzku4jqpi5h93yqkrf`.`curso`.`idCurso` = `cd`.`idCurso`));
+
+-- -----------------------------------------------------
+-- View `bvxzku4jqpi5h93yqkrf`.`vcursosdisponibles`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bvxzku4jqpi5h93yqkrf`.`vcursosdisponibles`;
+DROP VIEW IF EXISTS `bvxzku4jqpi5h93yqkrf`.`vcursosdisponibles` ;
+USE `bvxzku4jqpi5h93yqkrf`;
+CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bvxzku4jqpi5h93yqkrf`.`vcursosdisponibles` AS select `h`.`idHorario` AS `idHorario`,`h`.`hT` AS `hT`,`h`.`hP` AS `hP`,`h`.`dia_idD` AS `dia_idD`,`h`.`hrInicio` AS `hrInicio`,`h`.`hrFin` AS `hrFin`,`h`.`Aula` AS `Aula` from (`bvxzku4jqpi5h93yqkrf`.`carga` `c` left join (`bvxzku4jqpi5h93yqkrf`.`cursodetalle` `cd` join `bvxzku4jqpi5h93yqkrf`.`horario` `h` on(`cd`.`idCursoDetalle` = `h`.`idCursoDetalle`)) on(`h`.`idHorario` = `c`.`idHorario`)) where `c`.`idHorario` is null;
+USE `bvxzku4jqpi5h93yqkrf`;
+
+DELIMITER $$
+
+USE `bvxzku4jqpi5h93yqkrf`$$
+DROP TRIGGER IF EXISTS `bvxzku4jqpi5h93yqkrf`.`Generar_codigo` $$
+USE `bvxzku4jqpi5h93yqkrf`$$
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `bvxzku4jqpi5h93yqkrf`.`Generar_codigo`
+BEFORE INSERT ON `bvxzku4jqpi5h93yqkrf`.`docente`
+FOR EACH ROW
+begin
+	declare siguiente_codigo int;
+    set siguiente_codigo= (select ifnull(max(convert(substring(idDocente,2),signed integer)),0) from docente) + 1;
+    set new.idDocente=concat('D',LPAD(siguiente_codigo,3,0));
+end$$
+
+
+DELIMITER ;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
