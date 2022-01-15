@@ -25,7 +25,7 @@ def listar_carga(request):
             print("****************************************:",file)
             book=openpyxl.load_workbook(file,data_only=True)
             Datos=book.active
-            conn = pymysql.connect(host='localhost', user='root', password='', database='dbsilabos', charset='utf8mb4')
+            conn = pymysql.connect(host='localhost', user='root', password='admin', database='dbsilabos', charset='utf8mb4')
             rowII=3
             rowIF=3
             list=[]

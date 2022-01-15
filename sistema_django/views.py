@@ -4,5 +4,5 @@ from django.views.generic import TemplateView
 from django.views import View
 class Home(TemplateView):
     def get(self,request,*args,**kwargs):
-        return render(request,'index.html')
+        return render(request,'index1.html')
     

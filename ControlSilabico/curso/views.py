@@ -48,7 +48,7 @@ def eliminarCurso(request,idcurso):
 def Detalle_Curso(request,idcurso):
     import  pymysql
     #from django.db import co
-    conn = pymysql.connect(host='localhost', user='root', password='', database='dbsilabos', charset='utf8mb4')
+    conn = pymysql.connect(host='localhost', user='root', password='admin', database='dbsilabos', charset='utf8mb4')
     cur = conn.cursor()
     Args=(idcurso,)
     cur.callproc('sp_HroPorCurso',Args)
