@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>crear usuario</title>
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: white;
+            }
+            button{
+                background-color: #156ddf;
+                width: 25%;
+                padding: 15px;
+                color: black;
+                border: none;
+                float: center;
+                font-size: 15px;
+            }
+            label{
+                font-size: 20px;
+            }
+            form{
+                border: 3px solid #f1f1f1;
+            }
+            input[type=text],input[type=password]{
+                width: 50%;
+                font-size: 15px;
+                margin: 8px 0px;
+                padding: 12px 20px;
+                display: inline-block;
+                border: 2px solid rgb(0, 45, 128);
+                box-sizing: border-box;
+            }
+            button:hover{
+                opacity:0.7;
+
+            }
+            .container{
+                padding: 50px;
+                background-color: white;
+            }
+            .imgcontainer {
+                text-align: center;
+                margin: 24px 0 12px 0;
+            }
+              
+            img.avatar {
+                width: 20%;
+                border-radius: 50%;
+            }  
+        </style>
+    </head>
+    <body>
+        <center><h1>Registrar el Usuario de un Docente</h1></center>
+        <form action="#" method="post">
+            {% csrf_token %}
+            {% load static %}
+            <center><div class="container">
+                <div class="imgcontainer">
+                    <img src="{% static 'images/avatar2.jfif' %}" alt="Avatar" class="avatar">
+                </div>
+                <label for='nombre'><b>Usuario : </b></label>
+		        <input type='text' placeholder="ingrese usuario" name='nombre' required><br>
+
+                <label for='contrasenia'><b>Password : </b></label>
+            	<input type="text" placeholder="ingrese contrasenia" name="contrasenia" required><br> 
+                
+                <label for='idDocente'><b>idDoc : </b></label>
+            	<input type="text" placeholder="ingrese id del docente" name="idDocente" required><br> 
+		        
+		        <label for='tipo' ><b>tipo de usuario : </b></label>
+		        <input type='radio' name='tipo' value='docente' required>
+		        <label ><b>docente</b></label>
+		        <input type='radio' name='tipo' value='administrador' required>
+		        <label ><b>administrador</b></label><br>
+
+            	  
+            	
+            	<button type="submit"><b>Registrar Usuario</b></button><br>     
+            	
+            </div></center>
+        </form>
+    </body>
+</html>
