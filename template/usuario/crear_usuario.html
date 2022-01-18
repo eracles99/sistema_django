@@ -51,27 +51,30 @@
     </head>
     <body>
         <center><h1>Registrar el Usuario de un Docente</h1></center>
-        <form action="#" method="post">
+        <form action="{% url 'crear_usuario' %}" method="post">
             {% csrf_token %}
             {% load static %}
             <center><div class="container">
                 <div class="imgcontainer">
                     <img src="{% static 'images/avatar2.jfif' %}" alt="Avatar" class="avatar">
                 </div>
-                <label for='nombre'><b>Usuario : </b></label>
-		        <input type='text' placeholder="ingrese usuario" name='nombre' required><br>
+                <label for='usuario'><b>Usuario : </b></label>
+		        <input type='text' placeholder="ingrese usuario" name='usuario' required><br>
 
                 <label for='contrasenia'><b>Password : </b></label>
             	<input type="text" placeholder="ingrese contrasenia" name="contrasenia" required><br> 
+
+                <div style="display:none;">
                 
-                <label for='idDocente'><b>idDoc : </b></label>
-            	<input type="text" placeholder="ingrese id del docente" name="idDocente" required><br> 
-		        
+                    <label for='tipo'><b>tipo : </b></label>
+                    <input type="text" placeholder="ingrese id del docente" value="docente" name="tipo" required><br> 
+                </div>
+		        <!--  
 		        <label for='tipo' ><b>tipo de usuario : </b></label>
 		        <input type='radio' name='tipo' value='docente' required>
 		        <label ><b>docente</b></label>
 		        <input type='radio' name='tipo' value='administrador' required>
-		        <label ><b>administrador</b></label><br>
+		        <label ><b>administrador</b></label><br>-->
 
             	  
             	

@@ -7,12 +7,12 @@ import mysql.connector as sql
 #import pymysql as sql
 
 
-nombre=''
+usuario=''
 pwd=''
 t=''
 # Create your views here.
 def iniciar(request):
-    global nombre,pwd,t
+    global usuario,pwd,t
     print("================= tipo: ",t)
 
     if request.method=='POST':
@@ -21,16 +21,18 @@ def iniciar(request):
         d=request.POST
 
         for key,value in d.items():
-            if key=='nombre':
-                nombre=value
+            if key=='usuario':
+                usuario=value
             if key=='contrasenia':
                 pwd=value
             if key=='tipo':
                 t=value
-        #print("******* tipo:",t)
+        print("******* tipo:",usuario)
+        print("******* tipo:",pwd)
+        print("******* tipo:",t)
         if t=="administrador":
             #c="insert into users('{}','{}','{}','{}');".format(nombre,pwd,t,idDo)
-            c="select * from users where nombre='{}' and contrasenia='{}' and tipo='{}';".format(nombre,pwd,t)
+            c="select * from users where usuario='{}' and contrasenia='{}' and tipo='{}';".format(usuario,pwd,t)
             cursor.execute(c)
             t=tuple(cursor.fetchall())
             #m.commit()
@@ -40,14 +42,14 @@ def iniciar(request):
                 return render(request,"index1.html")
         else:
             #c="insert into users('{}','{}','{}','{}');".format(nombre,pwd,t,idDo)
-            c="select * from users where nombre='{}' and contrasenia='{}' and tipo='{}';".format(nombre,pwd,t)
+            c="select * from users where usuario='{}' and contrasenia='{}' and tipo='{}';".format(usuario,pwd,t)
             cursor.execute(c)
             t=tuple(cursor.fetchall())
             #m.commit()
             if t==():
                 return render(request,"login/error.html")
             else:
-                return render(request,"index2.html",{'nombre':nombre})
+                return render(request,"index2.html",{'nombre':usuario})
 
 
     return render(request,'login/iniciar_sesion.html')
