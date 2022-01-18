@@ -79,7 +79,7 @@ class Docente(models.Model):
         managed = False
         db_table = 'docente'
     def __str__(self):
-        return self.id
+        return self.iddocente
 
 
 class Horario(models.Model):
@@ -110,7 +110,7 @@ class Users(models.Model):
     iduser = models.AutoField(db_column='idUser', primary_key=True)  # Field name made lowercase.
     nombre = models.CharField(max_length=15)
     contrasenia = models.CharField(max_length=15)
-    tipo = models.CharField(max_length=15)
+    tipo = models.CharField(max_length=15,default='docente'or 'administrador')
     iddocente = models.ForeignKey(Docente, models.DO_NOTHING, db_column='idDocente')  # Field name made lowercase.
 
     class Meta:

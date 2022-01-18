@@ -5,8 +5,25 @@ from django.db.models import Q
 from django.db import connection
 import mysql.connector as sql
 #import pymysql as sql
+from .forms import ResgistrarDocenteForm
 
 
+def registrar_usuario_docente(request):
+    initial_data={'nombre':'','contrasenia':'','tipo':'docente'}
+    #docente_form=ResgistrarDocenteForm(initial=inicializar)
+    
+    if request.method=="POST":
+        docente_form=ResgistrarDocenteForm(request.POST)
+        
+        if docente_form.is_valid():
+            docente_form.save()
+            #return redirect('iniciar')
+            return render(request,'login/iniciar_sesion.html')
+    else:
+        docente_form=ResgistrarDocenteForm(initial=initial_data)
+    return render(request,'usuario/registrar_usuario_docente.html',{'registrar_docente_form':docente_form})
+
+'''
 nombre=''
 pwd=''
 t=''
@@ -34,8 +51,11 @@ def asignation(request):
         cursor.execute(c)
         m.commit()
     return render(request,'usuario/crear_usuario.html')
+'''
 
 
 
-        
+
+
+
 
