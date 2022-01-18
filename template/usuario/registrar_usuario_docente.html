@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Signup Page</title>
+        <title>crear usuario</title>
         <style>
             body{
                 font-family: Arial, Helvetica, sans-serif;
@@ -50,31 +50,42 @@
         </style>
     </head>
     <body>
-        <center><h1>Login </h1></center>
+        <center><h1>Registrar el Usuario de un Docente</h1></center>
         <form action="#" method="post">
             {% csrf_token %}
             {% load static %}
             <center><div class="container">
                 <div class="imgcontainer">
-                    <img src="{% static 'images/avatar1.jfif' %}" alt="Avatar" class="avatar">
+                    <img src="{% static 'images/avatar2.jfif' %}" alt="Avatar" class="avatar">
                 </div>
-
                 <label for='nombre'><b>Usuario : </b></label>
-		        <input type='text' placeholder="ingrese usuario" name='nombre' required><br>
+		          <!-- <input type='text' placeholder="ingrese usuario" name='nombre' required><br> -->
+                {{registrar_docente_form.nombre}}
+                <br>
 
                 <label for='contrasenia'><b>Password : </b></label>
-                <input type="password" placeholder="Enter Password" name="contrasenia" required><br>  
-                
-		        
-		        <label for='tipo' ><b>tipo de usuario : </b></label>
-		        <input type='radio' name='tipo' value='docente' required>
-		        <label ><b>docente</b></label>
-		        <input type='radio' name='tipo' value='administrador' required>
-		        <label ><b>administrador</b></label><br>
+                {{registrar_docente_form.contrasenia}} 
+                <br>
+                <div style="display:none;">
+                  <label for='tipo' ><b>tipo de usuario : </b></label>
+                  {{registrar_docente_form.tipo}}
 
-                <button type="submit"><b>INICIAR SESION</b></button><br>
-                no tengo cuenta <a href="http://127.0.0.1:8000/usuario/crear_usuario_docente/"> registrarse </a>     
+                </div>
                 
+
+               <br>
+               <label for='idDocente'><b>idDoc : </b></label>
+            	{{registrar_docente_form.iddocente}} 
+               <br>
+               <br>
+		        
+		        
+		       
+
+            	  
+            	
+            	<button type="submit"><b>Registrar Usuario</b></button><br>     
+            	
             </div></center>
         </form>
     </body>
