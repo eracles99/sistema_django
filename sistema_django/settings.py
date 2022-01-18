@@ -107,7 +107,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbsilabos',
         'USER': 'root',
-        'PASSWORD':'admin',
+        'PASSWORD':'',
         'HOST': 'localhost',
         'PORT':'3306',
         "OPTIONS": {

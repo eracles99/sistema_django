@@ -6,7 +6,6 @@ from django.db import connection
 import mysql.connector as sql
 #import pymysql as sql
 
-
 nombre=''
 pwd=''
 t=''
@@ -27,7 +26,7 @@ def iniciar(request):
                 pwd=value
             if key=='tipo':
                 t=value
-        #print("******* tipo:",t)
+        #print("*** tipo:",t)
         if t=="administrador":
             #c="insert into users('{}','{}','{}','{}');".format(nombre,pwd,t,idDo)
             c="select * from users where nombre='{}' and contrasenia='{}' and tipo='{}';".format(nombre,pwd,t)
@@ -51,7 +50,6 @@ def iniciar(request):
 
 
     return render(request,'login/iniciar_sesion.html')
-
 
 
         
