@@ -538,30 +538,67 @@ def silabos(request,codCurso,IdDocente,carrera,semestre):
         cursor=conn.cursor()
         importar_silabo(Tipo_cursos,rowII,rowIF,conn,cursor,semestre,exel)
         #-----------------------------------------------------------
-        temascons="select unidadc, capituloc, temac, sesionc, S.semestrec, idCargac from (((silabo as S inner join carga as C on S.idCargac= C.idCarga)inner join horario as H on H.idHorario=C.idHOrario) inner join cursodetalle as Cud on Cud.idCursoDetalle=H.idCursoDetalle) where idCurso='{}' and C.idDocente='{}' and S.semestrec='{}';".format(codCurso,IdDocente,semestre)
+        #temascons="select unidadc, capituloc, temac, sesionc, S.semestrec, idCargac from (((silabo as S inner join carga as C on S.idCargac= C.idCarga)inner join horario as H on H.idHorario=C.idHOrario) inner join cursodetalle as Cud on Cud.idCursoDetalle=H.idCursoDetalle) where idCurso='{}' and C.idDocente='{}' and S.semestrec='{}';".format(codCurso,IdDocente,semestre)
+        temascons="select unidadc, capituloc, temac, sesionc, S.semestrec, idCargac ,idDocente,idCurso from (((silabo as S inner join carga as C on S.idCargac= C.idCarga)inner join horario as H on H.idHorario=C.idHOrario) inner join cursodetalle as Cud on Cud.idCursoDetalle=H.idCursoDetalle);"
         cursor.execute(temascons)
-        temas=cursor.fetchall()
+        temas1=cursor.fetchall()
+        listtemas=[]
+        #--------convertir de tupla de tuplas a  lista de listas
+        for rowtemas in temas1:
+            listtemas.append([dato for dato in rowtemas])
+        temas=listtemas
+        #-------------conultar  por django -- para mostarra solo silabos del usuario
+        auxtemascons=[]
+        for rowtemascons in temas1:
+            if(rowtemascons[4]==semestre and rowtemascons[6]==IdDocente and rowtemascons[7]==codCurso):
+                auxtemascons.append(rowtemascons[0])
+                auxtemascons.append(rowtemascons[1])
+                auxtemascons.append(rowtemascons[2])
+                auxtemascons.append(rowtemascons[3])
+                auxtemascons.append(rowtemascons[4])
+                auxtemascons.append(rowtemascons[5])
+        temas1=auxtemascons
+        #--------------------------------------------------------------------
         conn.commit()
         cursor.close()
         #----------
-        contexto={'curso':curso,'docente':docente,'carrera':carrera,'tipo':Tipo_cursos,'DATOsemestre':semestre,'horario':temas}
+        contexto={'curso':curso,'docente':docente,'carrera':carrera,'tipo':Tipo_cursos,'DATOsemestre':semestre,'temas':temas1}
         return redirect ('silabo',codCurso,IdDocente,carrera,semestre)
     print("TIPO",Tipo_cursos)
     print(semestre)
-    temascons="select unidadc, capituloc, temac, sesionc, S.semestrec, idCargac from (((silabo as S inner join carga as C on S.idCargac= C.idCarga)inner join horario as H on H.idHorario=C.idHOrario) inner join cursodetalle as Cud on Cud.idCursoDetalle=H.idCursoDetalle) where idCurso='{}' and C.idDocente='{}' and S.semestrec='{}';".format(codCurso,IdDocente,semestre)
+    #-----------buscar silabo de docente -------------------------"
+    temascons="select unidadc, capituloc, temac, sesionc, S.semestrec, idCargac ,idDocente,idCurso from (((silabo as S inner join carga as C on S.idCargac= C.idCarga)inner join horario as H on H.idHorario=C.idHOrario) inner join cursodetalle as Cud on Cud.idCursoDetalle=H.idCursoDetalle);"
     cursor.execute(temascons)
     temas=cursor.fetchall()
-    print("#--------------vista de silabo  con django---------------")
-    #print(temas)
     listtemas=[]
     for rowtemas in temas:
         listtemas.append([dato for dato in rowtemas])
-    temas1=listtemas
+    temas=listtemas
+    print("-------------------------------vista sin ordenar------------------------")
+    print(temas)
+    print("---------------------------------------------------------")
+    #-------------conultar  por django -- para mostarra solo silabos del usuario
+    auxtemascons=[]
+    for rowtemascons in temas:
+        if(rowtemascons[4]==semestre and rowtemascons[6]==IdDocente and rowtemascons[7]==codCurso):
+            list=[]
+            list.append(rowtemascons[0])
+            list.append(rowtemascons[1])
+            list.append(rowtemascons[2])
+            list.append(rowtemascons[3])
+            list.append(rowtemascons[4])
+            list.append(rowtemascons[5])
+            auxtemascons.append(list)
+    temas1=auxtemascons
+    #-------------conultar  por django -- para mostarra solo silabos del usuario
+    print("#--------------vista de silabo  con django---------------")
+    #print(temas)
     #----------------elimanar  repetidos
     if(len(temas1)!=0):
         k=0
         eliminar_repetidos(temas1,k)
     #-------------
+    print("-------------------------------vista horarios------------------------")
     print(temas1)
     print("---------------------------------------------------------")
     contexto={'curso':curso,'docente':docente,'carrera':carrera,'tipo':Tipo_cursos,'DATOsemestre':semestre,'temas':temas1}
