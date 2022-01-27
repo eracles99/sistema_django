@@ -3,7 +3,7 @@ import csv
 from django.db import connection
 import pymysql
 
-def carga_masiva(conn,list):
+def carga_masiva(conn,list,semestre):
     cur = conn.cursor()
     Long=len(list)
     for i in range(Long):
@@ -32,7 +32,7 @@ def carga_masiva(conn,list):
             AULA=list[i][11]
             args=(dia1,)
             cur.callproc('sp_migraDia',args)
-            args_MIGRACION_MASIVA=(nombreDoc,tipocurso,codeCurso,nombre,carrera,Grupo,creditos,HT,HP,dia1,HrInicio,HrFin,AULA)
+            args_MIGRACION_MASIVA=(nombreDoc,tipocurso,codeCurso,nombre,carrera,Grupo,creditos,HT,HP,dia1,HrInicio,HrFin,AULA,semestre)
             cur.callproc('sp_migracion_masiva',args_MIGRACION_MASIVA)
             #print(list[i][k])
     conn.commit()
@@ -72,7 +72,7 @@ def Validador(Datos,rowII,rowIF):
             return False
         else: 
             return True
-def Trozador(list,rowII,rowIF,Datos,conn):
+def Trozador(list,rowII,rowIF,Datos,conn,semestre):
     Condicion=True
     vacio=0
     k=0
@@ -123,30 +123,31 @@ def Trozador(list,rowII,rowIF,Datos,conn):
             #print("VACIO :",vacio)
             del list[-(vacio):]
             list=Normalizador(list)
-            carga_masiva(conn,list)
+            carga_masiva(conn,list,semestre)
             return list,rowII-1,rowIF-1,True
         else:
             #print("Vacio en return else:",vacio)
             del list[-(vacio+1):]
             list=Normalizador(list)
-            carga_masiva(conn,list)
+            carga_masiva(conn,list,semestre)
             return list,rowII,rowIF,True
     return list,rowII-1,rowIF-1,False
 
-def main_carga(exel):
+def main_carga(exel,semestre):
     book=openpyxl.load_workbook(exel,data_only=True)
     Datos=book.active
-    conn = pymysql.connect(host='localhost', user='root', password='', database='dbsistema', charset='utf8mb4')
+    conn = pymysql.connect(host='localhost', user='root', password='', database='dbsilabos', charset='utf8mb4')
     rowII=3
     rowIF=3
     list=[]
     mensaje=True
     while(mensaje==True):
         list=[]
-        list,rowII,rowIF,mensaje=Trozador(list,rowII,rowIF,Datos,conn)
+        list,rowII,rowIF,mensaje=Trozador(list,rowII,rowIF,Datos,conn,semestre)
 
-#exel='C:\\Users\\angel\\OneDrive\\Escritorio\\reporte carga academica.xlsx'
-#main_carga(exel)
+exel='C:\\Users\\angel\\Downloads\\reporte carga academica.xlsx'
+semestre='2021-II'
+main_carga(exel,semestre)
 '''list,rowII,rowIF,mensaje=Trozador(list,rowII,rowIF,Datos,conn)
 print(list)
 print("mensaje:",mensaje,rowII)
@@ -155,7 +156,7 @@ print("longitud de ista:",len(list))#'''
 #----Insercion BD-----------------
 #--conectar a bd
     #from django.db import co
-'''conn = pymysql.connect(host='localhost', user='root', password='', database='dbsistema', charset='utf8mb4')
+'''conn = pymysql.connect(host='localhost', user='root', password='', database='dbsistema', charset='utf8_general_ci')
 cur = conn.cursor()
 Long=len(list)
 for i in range(Long):

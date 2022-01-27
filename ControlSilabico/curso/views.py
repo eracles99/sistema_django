@@ -63,6 +63,7 @@ def Detalle_Curso(request,idcurso):
             CursoDetalleO=Curso.objects.get(idcurso=idcurso)
             CursoDetalleFilter=Cursodetalle.objects.filter(idcurso_id=idcurso)
             contexto={'consultas':result1,'CursoDetalleO':CursoDetalleO,'CursoDetFilter':CursoDetalleFilter}
+            print(CursoDetalleO.carrera)
             #shared =CursoDetalleO.objects.filter(id_idcurso=idc'CursoDetalleO':CursoDetalleOurso)
     return render(request,'curso/Detalle_Curso/Listar_Detalle.html',contexto)
 

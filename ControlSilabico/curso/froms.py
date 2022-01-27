@@ -1,4 +1,5 @@
 
+from sys import meta_path
 from django import forms
 from django.db.models import fields
 from ControlSilabico.models import*
@@ -16,6 +17,11 @@ class horarioForm(forms.ModelForm):
     class Meta:
         model=Horario
         fields=['idhorario','ht','hp','idd','hrinicio','hrfin','aula','idcursodetalle']
+class semestreForm(forms.ModelForm):
+    class Meta:
+        model=Semestre
+        fields=['idsemestre']
+
         
 '''class M(forms.ModelForm):
     

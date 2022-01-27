@@ -4,6 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from ControlSilabico.curso.froms import CursoDetallForm
 from ControlSilabico.models import *
 from ControlSilabico.carga.froms import *
+from ControlSilabico.curso.froms import *
 # Create your views here.
 from django.db.models.query import InstanceCheckMeta
 from django.db.models import Q
@@ -11,18 +12,22 @@ from django.db import connection
 import openpyxl
 import pymysql
 
+
 def listar_carga(request):
     cursor=connection.cursor()
     try:
         cursor.execute('select * from vcargadocente')
         resultado=cursor.fetchall()
-        print(resultado)
+        #print(resultado)
         print("holaaaaaaaaa")
+        #------------------------
         #-------------------------------------------------
         if(request.method =='POST'):
             print("HOLAAAAAAAAAAA")
             file=request.FILES["file"]
+            semestre=request.POST['semestre']
             print("****************************************:",file)
+            print("****************************************:",semestre)
             book=openpyxl.load_workbook(file,data_only=True)
             Datos=book.active
             conn = pymysql.connect(host='localhost', user='root', password='', database='dbsilabos', charset='utf8mb4')
@@ -32,7 +37,8 @@ def listar_carga(request):
             mensaje=True
             while(mensaje==True):
                 list=[]
-                list,rowII,rowIF,mensaje=Trozador(list,rowII,rowIF,Datos,conn)
+                list,rowII,rowIF,mensaje=Trozador(list,rowII,rowIF,Datos,conn,semestre)
+            
             return redirect('listar_carga')
         return render(request,'carga/inicio.html',{'carga':resultado}) # con esto le mande al templetes
     finally:
@@ -78,7 +84,7 @@ def asignar_carga(request,idCursoDetalle):
         error=e 
     return render(request,'carga/generar_carga.html',{'carga_form':carga_form})
 #---------------------------------------------------------MIGRACION EXEL------------------------------------------------
-def carga_masiva(conn,list):
+def carga_masiva(conn,list,semestre):
     cur = conn.cursor()
     Long=len(list)
     for i in range(Long):
@@ -107,7 +113,7 @@ def carga_masiva(conn,list):
             AULA=list[i][11]
             args=(dia1,)
             cur.callproc('sp_migraDia',args)
-            args_MIGRACION_MASIVA=(nombreDoc,tipocurso,codeCurso,nombre,carrera,Grupo,creditos,HT,HP,dia1,HrInicio,HrFin,AULA)
+            args_MIGRACION_MASIVA=(nombreDoc,tipocurso,codeCurso,nombre,carrera,Grupo,creditos,HT,HP,dia1,HrInicio,HrFin,AULA,semestre)
             cur.callproc('sp_migracion_masiva',args_MIGRACION_MASIVA)
             #print(list[i][k])
     conn.commit()
@@ -147,7 +153,7 @@ def Validador(Datos,rowII,rowIF):
             return False
         else: 
             return True
-def Trozador(list,rowII,rowIF,Datos,conn):
+def Trozador(list,rowII,rowIF,Datos,conn,semestre):
     Condicion=True
     vacio=0
     k=0
@@ -198,17 +204,14 @@ def Trozador(list,rowII,rowIF,Datos,conn):
             #print("VACIO :",vacio)
             del list[-(vacio):]
             list=Normalizador(list)
-            carga_masiva(conn,list)
+            carga_masiva(conn,list,semestre)
             return list,rowII-1,rowIF-1,True
         else:
             #print("Vacio en return else:",vacio)
             del list[-(vacio+1):]
             list=Normalizador(list)
-            carga_masiva(conn,list)
+            carga_masiva(conn,list,semestre)
             return list,rowII,rowIF,True
     return list,rowII-1,rowIF-1,False
 
 #def main_carga(request):
-def upload(request):
-    return render(request,'carga/upload.html')
-    
