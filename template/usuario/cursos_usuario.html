@@ -1,0 +1,83 @@
+{% extends 'index2.html' %}
+{% block div %}
+    <link rel="stylesheet" href="{% static 'dashboard/css/card.css'%}">
+    {% if cursosUsuario %}
+        <section class="container-cards">
+            {% for cursos in cursosUsuario%}
+                <div class="card-cards">
+                    <heade class="">
+                        <figure>
+                            <img src="{% static 'images/cards.jpg' %}" alt="cards" class="imgcarg1">
+                        </figure>
+                        <div class="Datos-Curso">
+                            {%for row in cursos%}
+                                {% if forloop.counter == 1 %}
+                                    <center>
+                                        {{row.0}}
+                                        {{row.1}}
+                                        <div class="Carrera">{{row.2}}</div>
+                                        <p>{{row.3}}</p>
+                                    </center>
+                                {%endif%}
+                            {%endfor%}
+                        </div>
+                    </heade>
+                    <hr>
+                    <div class="contenidocards" >
+                        <table style='font-size: 8.6px' class="table-cards">
+                            <thead>
+                                <tr>
+                                    <th>DIA</th>
+                                    <th>TIPO</th>
+                                    <th>HORA</th>
+                                    <th>HRINI</th>
+                                    <th>HRFIN</th>
+                                    <th>AULA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for row in cursos%}
+                                    {% if forloop.counter == 2 %}
+                                        {%for datoH in row %}
+                                            {%if datoH.3 == 'TEORICO' %}
+                                                <tr>
+                                                    <td>{{datoH.2}}</td>
+                                                    <td >{{datoH.3}}</td>
+                                                    <td align="center">{{datoH.0}}</td>
+                                                    <td align="center">{{datoH.4}}</td>
+                                                    <td align="center">{{datoH.5}}</td>
+                                                    <td align="center">{{datoH.6}}</td>
+                                                </tr>
+                                            {%else%}
+                                                <tr>
+                                                    <td>{{datoH.2}}</td>
+                                                    <td >{{datoH.3}}</td>
+                                                    <td align="center">{{datoH.1}}</td>
+                                                    <td align="center">{{datoH.4}}</td>
+                                                    <td align="center">{{datoH.5}}</td>
+                                                    <td align="center">{{datoH.6}}</td>
+                                                </tr>
+                                            {%endif%}
+                                            </tr>
+                                        {%endfor%}
+                                    {% endif %}
+                                {%endfor%}       
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <div class="footer">
+                        {%for row in cursos%}
+                            {% if forloop.counter == 1 %}
+                                <a href="{% url 'silabo' row.0 docente.iddocente row.2 row.5 %}" ><button class="Botton btn1">ver silabo</button></a>
+                            {% endif %}
+                        {%endfor%}
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+    {% else %}
+        <h1>No existe cursos</h1>
+    {% endif %} 
+    
+{% endblock %}

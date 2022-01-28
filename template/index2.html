@@ -23,7 +23,7 @@
 
     <div class="name__page">
       <i class="far fa-user-circle"></i>
-      <div>Usuario: {{ usuario }}</div>
+      <div >{{ docente.nombrecompleto }}</div>
     </div>
     
     <div class="options__menu">
@@ -36,7 +36,7 @@
       </a>
       
       <div>
-        <a href="{% url 'listar_curso' %}" >  
+        <a href="{% url 'cursos_usuario' docente.iddocente %}">
           <div class="options">
             <i class="fas fa-book" title="Cursos"></i>
             <h4>Mis Cursos</h4>  
@@ -50,7 +50,10 @@
   {% block main %}
    <main class="main col">
       {%block div%}
-      
+      hola
+      {% if docente%}
+        {{docente.nombrecompleto}}
+      {% endif %}
       {%endblock div%}
    </main>
   {% endblock main %}

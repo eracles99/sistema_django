@@ -15,6 +15,10 @@
             <form action="{% url 'listar_carga' %}" method="post" enctype="multipart/form-data" >
                 {% csrf_token %} 
                 <div class='coln'>
+                    <label for="semestre" class="for">Semestre</label>
+                    <input type="text" name='semestre' id='semestre'>
+                    <i class="fas fa-plus"></i>
+                    <i class="fas fa-minus"></i><br>
                     <input type="file"  name='file'>  
                     <input type="submit" value='Importar'/>
                 </div>

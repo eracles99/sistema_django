@@ -1,9 +1,11 @@
+from pyexpat import model
 from django.shortcuts import render
-
 from django.db.models.query import InstanceCheckMeta
 from django.db.models import Q
 from django.db import connection
 import mysql.connector as sql
+
+from ControlSilabico.models import *
 #import pymysql as sql
 
 
@@ -16,7 +18,7 @@ def iniciar(request):
     print("================= tipo: ",t)
 
     if request.method=='POST':
-        m=sql.connect(host="localhost", user="root",passwd="admin",database="dbsilabos")
+        m=sql.connect(host="localhost", user="root",passwd="",database="dbsilabos")
         cursor=m.cursor()
         d=request.POST
 
@@ -49,11 +51,10 @@ def iniciar(request):
             if t==():
                 return render(request,"login/error.html")
             else:
-                return render(request,"index2.html",{'nombre':usuario})
-
-
+                docente=Docente.objects.get(iddocente=usuario)
+                print(docente.nombrecompleto)
+                return render(request,"index2.html",{'docente':docente})
     return render(request,'login/iniciar_sesion.html')
-
 
 
         

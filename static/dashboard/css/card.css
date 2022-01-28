@@ -1,67 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:"Poppins",sans-serif;
+    box-sizing: border-box;
+}
 body
 {
     background: #e2e0e0;
 }
-.center
+.container-cards
 {
-
-    text-align:center;
-}
-.card-container
-{
-    font-family: 'Open Sans', sans serif;
-    font-size: 120px;
-    font-weight: bold;
-
-    width: 400px;
-    height: 250px;
-    margin: 80px auto;
-
-    border-radius: 10px;
-    perspective: 1400px;
-}
-
-.card
-{
-    position: relative;
-    font-size: 18px;
-    height: 100%;
-
-    border-radius: 10px;
-
-    width: 100%;
-    transform-style: preserve-3d;
-}
-
-.front,
-.back
-{
-    display: flex;
-
-    width: 100%;
-    height: 100%;
-
-    border-radius: 10px;
-
+    width:100%;
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    backface-visibility: hidden;
+    /*padding: 0px 34%;*/
 }
-
-.front
+.contenidocards
 {
-    color: rgb(0, 0, 0);
-    background: #ececec;
+    width:100%;
+    padding: 0.5em;
+    height: 140px;
 }
-
-.back
+.footer
 {
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    transform: rotateY(180deg);
-
-    color: #2196f3;
+    text-align:center;
+    width: 100%;
+    height: 50px;
+    max-width: auto 0;
+    background:#145B83;
+    color: #fff;
+}
+.card-cards
+{ 
+    width: 250px;
+    margin: 20px;
+    border-radius: 6px;
+    overflow: hidden;
     background: #fff;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    cursor: default;
+    transition: all 200ms ease;
 }
+.card-cards:hover
+{
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);   
+    transform: translateY(-0.5%);
+}
+.card-cards img
+{
+    width: 100%;
+    height: 150px;
+}
+.Datos-Curso
+{
+    padding: 10px 10px;
+    width:100%;
+    height: 80px;
+}
+.card-cards .Datos-Curso
+{
+    color: rgb(41, 40, 40);
+    background:#fff;
+    font-size:small;
+}
+.table-cards{
+    margin: auto;
+    text-align: left;
+    background: rgb(238, 237, 237);
+    
+}
+hr
+{
+    width: 100%;
+    height: 2px;
+    background:rgb(240, 240, 240);
+}
+th,td{
+    border: solid 1px #fff;
+    padding: 0px;
+}
+.Botton{
+    margin: 10px;
+    padding: 5px 20px;
+    border: 3px solid rgb(100, 100,100, 0.1);
+    margin-bottom: 20px;
+    font-family:'Poppins',sans-serif;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    color:rgba(233, 231, 231, 0.932);
+    background-size: 300%;
+}
+.btn1{
+    background-image: linear-gradient(to left,#00B7DA,#161569,#00B7DA);
+}
+.Carrera{
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+/*.card-cards p 
+{
+    font-size:2.6 ;
+    color:rgb(0, 0, 0);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}*/

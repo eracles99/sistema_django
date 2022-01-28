@@ -1,0 +1,44 @@
+{% extends 'index2.html' %}
+{% block div %}
+    <link rel="stylesheet" href="{% static 'dashboard/css/card.css'%}">
+    <link rel="stylesheet" href="{% static 'dashboard/css/silabo.css'%}">
+    <div class="header-silabo">
+            <h1>SILABO DE  {{curso.idcurso}} {{curso.nombre}} {{DATOsemestre}} </h1>
+            <hr>
+            <h3>{{carrera}}<br></h3><br>
+            <hr>
+        {{docente.nombrecompleto}}<br>
+    </div>
+    <div>
+        <div>
+            <form action="{% url 'silabo' curso.idcurso docente.iddocente carrera DATOsemestre %}" method="post" enctype="multipart/form-data" >
+                {% csrf_token %} 
+                <input type="file"  name='exel_silabo'>  
+                <input type="submit" value='Importar'/>
+            </form>
+        </div>
+        <form>
+
+        </form>
+        <table class="table-cards">
+            <thead>
+                <tr>
+                    <th>UNIDAD</th>
+                    <th>CAPITULO</th>
+                    <th>TEMA</th>
+                    <th>SESION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in temas%}
+                    <tr>
+                        <td>{{row.0}}</td>
+                        <td>{{row.1}}</td>
+                        <td>{{row.2}}</td>
+                        <td>{{row.3}}</td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

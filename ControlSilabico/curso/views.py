@@ -48,7 +48,7 @@ def eliminarCurso(request,idcurso):
 def Detalle_Curso(request,idcurso):
     import  pymysql
     #from django.db import co
-    conn = pymysql.connect(host='localhost', user='root', password='admin', database='dbsilabos', charset='utf8mb4')
+    conn = pymysql.connect(host='localhost', user='root', password='', database='dbsilabos', charset='utf8mb4')
     cur = conn.cursor()
     Args=(idcurso,)
     cur.callproc('sp_HroPorCurso',Args)
@@ -63,10 +63,15 @@ def Detalle_Curso(request,idcurso):
             CursoDetalleO=Curso.objects.get(idcurso=idcurso)
             print('CURSO CURSO CURSOS',CursoDetalleO)
             CursoDetalleFilter=Cursodetalle.objects.filter(idcurso_id=idcurso)
+<<<<<<< HEAD
             tamanio=len(CursoDetalleFilter)
 
 
             contexto={'consultas':result1,'CursoDetalleO':CursoDetalleO,'CursoDetFilter':CursoDetalleFilter,'tamanio':tamanio}
+=======
+            contexto={'consultas':result1,'CursoDetalleO':CursoDetalleO,'CursoDetFilter':CursoDetalleFilter}
+            print(CursoDetalleO.carrera)
+>>>>>>> 629018a5480522218cb4868e4c26ea3ddcdddad0
             #shared =CursoDetalleO.objects.filter(id_idcurso=idc'CursoDetalleO':CursoDetalleOurso)
     return render(request,'curso/Detalle_Curso/Listar_Detalle.html',contexto)
 # errores con la siguiente funcion
