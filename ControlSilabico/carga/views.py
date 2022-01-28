@@ -77,6 +77,22 @@ def asignar_carga(request,idCursoDetalle):
     except ObjectDoesNotExist as e:
         error=e 
     return render(request,'carga/generar_carga.html',{'carga_form':carga_form})
+'''
+def asignar_carga(request,idHorario):
+    print("%%%%%%%%%%%%%%%%%%",idHorario)
+    #initial_data={'idhorario':'','ht':'','hp':'','idd':'','hrinicio':'','hrfin':'','aula':'','idcursodetalle':idcursodetalle}
+    initial_data={'iddocente':'','idhorario':idHorario}
+    
+    
+    carga_form=cargaForm(request.POST or None,initial=initial_data)
+    if carga_form.is_valid():
+        carga_form.save()
+        return redirect('listar_cursosdisponibles')
+    carga_form={'cursoHorario_form':carga_form}   
+   
+    #return render(request,'curso/Detalle_Curso/Crear_Horario.html',{'cursoHorario_form':cursoHorario_form,'idcursodetalle':idcursodetalle})
+    return render(request,'carga/generar_carga.html',carga_form)
+''' 
 #---------------------------------------------------------MIGRACION EXEL------------------------------------------------
 def carga_masiva(conn,list):
     cur = conn.cursor()

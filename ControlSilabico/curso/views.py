@@ -61,14 +61,21 @@ def Detalle_Curso(request,idcurso):
     conn.close()
     if request.method == 'GET':
             CursoDetalleO=Curso.objects.get(idcurso=idcurso)
+            print('CURSO CURSO CURSOS',CursoDetalleO)
             CursoDetalleFilter=Cursodetalle.objects.filter(idcurso_id=idcurso)
-            contexto={'consultas':result1,'CursoDetalleO':CursoDetalleO,'CursoDetFilter':CursoDetalleFilter}
+            tamanio=len(CursoDetalleFilter)
+
+
+            contexto={'consultas':result1,'CursoDetalleO':CursoDetalleO,'CursoDetFilter':CursoDetalleFilter,'tamanio':tamanio}
             #shared =CursoDetalleO.objects.filter(id_idcurso=idc'CursoDetalleO':CursoDetalleOurso)
     return render(request,'curso/Detalle_Curso/Listar_Detalle.html',contexto)
-
+# errores con la siguiente funcion
+'''
 def crear_horario(request,idcurso):
     print('+++++++++++crear_horario')
+    #curso_detalle1=Cursodetalle.objects.get(idcurso=idcurso)
     if(request.method == 'POST'):
+        #cursoDetalle_form=CursoDetallForm(request.POST)
         cursoDetalle_form=CursoDetallForm(request.POST)
         horario_form=horarioForm(request.POST)
         if cursoDetalle_form.is_valid() and horario_form.is_valid() :
@@ -80,12 +87,91 @@ def crear_horario(request,idcurso):
         cursoDetalle_form=CursoDetallForm()
     RecuCurso=Curso.objects.get(idcurso=idcurso)
     return render(request,'curso/Detalle_Curso/Crear_Horario.html',{'cursoDetalle_form':cursoDetalle_form,'horario_form':horario_form,'RecuCurso':RecuCurso})
-        
-        
+'''
+def crear_detalle(request,idcurso):
+    print('+++++++++++crear_horario')
+    #curso_detalle1=Cursodetalle.objects.get(idcurso=idcurso)
+    if(request.method == 'POST'):
+        #cursoDetalle_form=CursoDetallForm(data)
+        cursoDetalle_form=CursoDetallForm(request.POST)
+        if cursoDetalle_form.is_valid():
+            cursoDetalle_form.save()
+            #return redirect('listar_carga')
+            return redirect('Detalle_Curso',idcurso)
+            #return render(request,'curso/Detalle_Curso/Listar_Detalle.html')
+    else:
+        cursoDetalle_form=CursoDetallForm()
+    #RecuCurso=Curso.objects.get(idcurso=idcurso)
+    return render(request,'curso/Detalle_Curso/Crear_Detalle.html',{'cursoDetalle_form':cursoDetalle_form})
+''' 
+def crear_horario(request,idcurso,idcursodetalle):
+    print('+++++++++++crear_horario')
+    #curso_detalle1=Cursodetalle.objects.get(idcurso=idcurso)
+    #idhorario','ht','hp','idd','hrinicio','hrfin','aula','idcursodetalle'
     
+    #horario=Horario.objects.get(idcursodetalle=idcursodetalle)
+    if(request.method == 'POST'):
+        #cursoDetalle_form=CursoDetallForm(data)
+        #cursoHorario_form=horarioForm(initial={'idcursodetalle':idcursodetalle})
+        data={'idhorario':'','ht':'','hp':'','idd':'','hrinicio':'','hrfin':'','aula':'','idcursodetalle':idcursodetalle}
+        cursoHorario_form=horarioForm(request.POST or None,initial=data)
+        
+        if cursoHorario_form.is_valid():
+            cursoHorario_form.save()
+            #return redirect('listar_carga')
+            return redirect('Detalle_Curso',idcurso)
+            #return render(request,'curso/Detalle_Curso/Listar_Detalle.html')
+    else:
+        cursoHorario_form=horarioForm()
+    #RecuCurso=Curso.objects.get(idcurso=idcurso)
+    return render(request,'curso/Detalle_Curso/Crear_Horario.html',{'cursoHorario_form':cursoHorario_form,'idcursodetalle':idcursodetalle})
+'''
+
+def crear_horario(request,idcurso,idcursodetalle):
+    initial_data={'idhorario':'','ht':'','hp':'','idd':'','hrinicio':'','hrfin':'','aula':'','idcursodetalle':idcursodetalle}
+    
+    
+    cursoHorario_form=horarioForm(request.POST or None,initial=initial_data)
+    if cursoHorario_form.is_valid():
+        cursoHorario_form.save()
+        return redirect('Detalle_Curso',idcurso)
+    cursoHorario_form={'cursoHorario_form':cursoHorario_form}   
+   
+    #return render(request,'curso/Detalle_Curso/Crear_Horario.html',{'cursoHorario_form':cursoHorario_form,'idcursodetalle':idcursodetalle})
+    return render(request,'curso/Detalle_Curso/Crear_Horario.html',cursoHorario_form)
+
+
+
+   
     
 
-'''def listarCursoH(request):
+#def eliminar_detalle_curso(request,id)
+'''
+# su reemplazo
+
+def crear_horario(request,idcurso):
+    curso_detalle_form=None
+    error=None
+    try:
+        curso_detalle1=Cursodetalle.objects.get(idcurso=idcurso)
+        if request.method == 'GET':
+            curso_detalle_form=CursoDetallForm(instance=curso_detalle1)
+        else:
+            curso_detalle_form=CursoDetallForm(request.POST,instance=curso_detalle1)  
+            if curso_detalle_form.is_valid():
+                curso_detalle_form.save()  
+            return redirect('listar_docente')
+    except ObjectDoesNotExist as e:
+        error=e 
+    return render(request,'docentes/create.html',{'docente_form':curso_detalle_form,"error":error})
+        
+'''  
+    
+
+
+
+'''
+def listarCursoH(request):
     cursosH=CursosHorarios.objects.all()
     return render(request,'curso/cursoHorario/listar_cursoH.html',{'cursosH':cursosH})
 def crearCursoH(request):

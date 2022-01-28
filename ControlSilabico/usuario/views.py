@@ -30,12 +30,17 @@ def asignation(request):
                 t=value
             
         #c="insert into users('{}','{}','{}','{}');".format(nombre,pwd,t,idDo)
-        c="INSERT INTO `dbsilabos`.`users` (`usuario`, `contrasenia`, `tipo`) VALUES ('{}','{}','{}');".format(usuario,pwd,t)
-       
-        p=cursor.execute(c)
-        print("**************",p)
-    
-        m.commit()
+        try:
+            c="INSERT INTO `dbsilabos`.`users` (`usuario`, `contrasenia`, `tipo`) VALUES ('{}','{}','{}');".format(usuario,pwd,t)
+        
+            p=cursor.execute(c)
+            print("**************",p)
+        
+            m.commit()
+        except:
+            print(" ERROR XDXD")
+            return render(request,'usuario/alerta.html')
+
     return render(request,'usuario/crear_usuario.html')
 
 '''

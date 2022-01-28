@@ -12,10 +12,14 @@
                         <table border="1" class="table  table-hover table-bordered " cellpadding="10">
                             <thead>
                                 <tr>
-                                    <th>idCursoDetalle</th>
-                                    <th>codigo curso</th>
-                                    <th>Curso</th>
-                                    <th>Tipo curso</th>
+                                    <th>idHorario</th>
+                                    <th>hora teorica</th>
+                                    <th>hora practica</th>
+                                    <th>dia</th>
+                                    <th>hora inicio</th>
+                                    <th>hora fin</th>
+                                    <th>Aula</th>
+
                                     <th> </th>
                                 
                                 </tr>
@@ -27,6 +31,9 @@
                                         <td>{{c.1}}</td>
                                         <td>{{c.2}}</td>
                                         <td>{{c.3}}</td>
+                                        <td>{{c.4}}</td>
+                                        <td>{{c.5}}</td>
+                                        <td>{{c.6}}</td>
                                         
                                         <td>
                                             <a href="{% url 'asignar' c.0 %}"><button type="button" class="btn btn-success">asignar</button></a>

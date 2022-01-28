@@ -1,0 +1,51 @@
+{% extends 'index1.html' %}
+
+{% block titulo %} Creacionde  Horarios y Detalles {% endblock titulo %}
+{% block div %}
+   <h1>CURSO</h1>
+   {% csrf_token %}
+   {% if RecuCurso %}
+      <form action="/my-handling-form-page" method="post"></form>
+         <div class="container px-1">
+            <div class="row gx-3">
+               <div class="col-sm-5">
+                     <label for="name">Codigo:</label>
+                     <label for="name">{{RecuCurso.idcurso}}</label>
+               </div>
+               <div class="col-sm-5">
+                     <label for="mail">Nombre:</label>
+                     <label for="mail">{{RecuCurso.nombre}}</label>
+               </div>
+               <div class="col-sm-5">
+                     <label for="mail">Carrera:</label>
+                     <label for="mail">{{RecuCurso.carrera}}</label>
+               </div>
+            </div>
+         </div>
+   </form>
+   {% endif %}
+ <!--  
+   <form   Method="POST">
+     {% csrf_token %}
+     {% if error %}
+        <h2>{{ error }}</h2>
+     {% else %}
+        <p class="text-break"><h2 class="">Crear Tipo Curso</h2></p>
+        
+        <button type="submit" class="btn btn-success">crear</button>
+      {% endif %}
+  </form>-->
+
+   <div class="card">
+      <div class="card-header">
+         <h2>detalle curso</h2>
+      </div>
+      <div class="card-body">
+         <form action="" method="POST" enctype="multipart/form-data">
+         {% csrf_token %}
+         {{ cursoDetalle_form.as_p }}
+         <button type="submit" class="btn btn-primary">AGREGAR </button>
+         </form>
+      </div>
+   </div>
+{% endblock div %}

@@ -33,7 +33,7 @@
             <table border='4'>
                 <thead>
                     <tr>
-                        <tH>Tipo</th>
+                        <th>Tipo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,7 +41,7 @@
                         <tr>
                             <td>{{i.idtipocurso}}</td>
                             <td>
-                                <a href="#"><button>crear Horario</button></a>
+                                <a href="{% url 'crear_horario' CursoDetalleO.idcurso i.idcursodetalle %}"><button>crear Horario</button></a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -52,9 +52,18 @@
         {% endif %}
     </div>
     <div>
-        <a href="{% url 'crear_horario' CursoDetalleO.idcurso %}">
-            <button type="button" class="btn btn-dark">Crear Tipo</button>
-        </a>
+        {% if tamanio > 1 %}
+            <div style="display:none;">
+                <a href="{% url 'crear_detalle' CursoDetalleO.idcurso  %}">
+                    <button type="button" class="btn btn-dark">Crear Tipo</button>
+                </a>
+            </div>
+            {% else %}
+                <a href="{% url 'crear_detalle' CursoDetalleO.idcurso  %}">
+                    <button type="button" class="btn btn-dark">Crear Tipo</button>
+                </a>
+
+        {% endif %}
     </div>
     {% if consultas%}
         <div class='main-container'>

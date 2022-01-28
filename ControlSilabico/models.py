@@ -93,6 +93,8 @@ class Catcurso(models.Model):
     class Meta:
         managed = False
         db_table = 'catcurso'
+    def __str__(self):
+        return self.idcat_curso
 
 
 class Catdocente(models.Model):
@@ -101,6 +103,8 @@ class Catdocente(models.Model):
     class Meta:
         managed = False
         db_table = 'catdocente'
+    def __str__(self):
+        return self.idcategoria
 
 
 class Curso(models.Model):
@@ -114,6 +118,8 @@ class Curso(models.Model):
     class Meta:
         managed = False
         db_table = 'curso'
+    def __str__(self):
+        return self.idcurso
 
 
 class Cursodetalle(models.Model):
@@ -124,6 +130,8 @@ class Cursodetalle(models.Model):
     class Meta:
         managed = False
         db_table = 'cursodetalle'
+    def __str__(self):
+        return str(self.idcursodetalle)
 
 
 class Dia(models.Model):
@@ -132,6 +140,8 @@ class Dia(models.Model):
     class Meta:
         managed = False
         db_table = 'dia'
+    def __str__(self):
+        return self.idd
 
 
 class DjangoAdminLog(models.Model):
@@ -203,6 +213,8 @@ class Horario(models.Model):
     class Meta:
         managed = False
         db_table = 'horario'
+    def __str__(self):
+        return self.idhorario
 
 
 class Tipocurso(models.Model):
@@ -212,6 +224,8 @@ class Tipocurso(models.Model):
     class Meta:
         managed = False
         db_table = 'tipocurso'
+    def __str__(self):
+        return self.idtipocurso
 
 
 class Users(models.Model):
