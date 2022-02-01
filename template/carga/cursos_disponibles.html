@@ -13,6 +13,9 @@
                             <thead>
                                 <tr>
                                     <th>idHorario</th>
+                                    <th>idcurso</th>
+                                    <th>nombre curso</th>
+                                    <th>grupo</th>
                                     <th>hora teorica</th>
                                     <th>hora practica</th>
                                     <th>dia</th>
@@ -34,6 +37,10 @@
                                         <td>{{c.4}}</td>
                                         <td>{{c.5}}</td>
                                         <td>{{c.6}}</td>
+                                        <td>{{c.7}}</td>
+                                        <td>{{c.8}}</td>
+                                        <td>{{c.9}}</td>
+                                        
                                         
                                         <td>
                                             <a href="{% url 'asignar' c.0 %}"><button type="button" class="btn btn-success">asignar</button></a>

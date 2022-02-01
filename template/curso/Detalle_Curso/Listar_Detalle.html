@@ -34,6 +34,7 @@
                 <thead>
                     <tr>
                         <th>Tipo</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -42,7 +43,9 @@
                             <td>{{i.idtipocurso}}</td>
                             <td>
                                 <a href="{% url 'crear_horario' CursoDetalleO.idcurso i.idcursodetalle %}"><button>crear Horario</button></a>
+                                <a href="{% url 'delete_tipo' i.idcursodetalle i.idcurso %}"><button type="button" class="btn btn-danger">Delete</button></a>
                             </td>
+
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -94,6 +97,10 @@
                             <td>{{item.5}}</td>
                             <td>{{item.6}}</td>
                             <td>{{item.7}}</td>
+                            <td>
+                                
+                                <a href="{% url 'delete_horario' item.8 item.9 %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                            </td>
                         </tr>
                         <!--tr>
                             {%for i in item%}

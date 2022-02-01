@@ -6,7 +6,7 @@ from ControlSilabico.models import*
 class cargaForm(forms.ModelForm):
     class Meta:
         model=Carga
-        fields=['idcarga','iddocente','idhorario']
+        fields=['idcarga','iddocente','idhorario','semestrec']
         
 '''class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)

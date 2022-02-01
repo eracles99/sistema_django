@@ -30,7 +30,7 @@ def listar_carga(request):
             print("****************************************:",semestre)
             book=openpyxl.load_workbook(file,data_only=True)
             Datos=book.active
-            conn = pymysql.connect(host='localhost', user='root', password='', database='dbsilabos', charset='utf8mb4')
+            conn = pymysql.connect(host='localhost', user='root', password='admin', database='dbsilabos', charset='utf8mb4')
             rowII=3
             rowIF=3
             list=[]
@@ -67,6 +67,14 @@ def asignando(request,idCursoDetalle):
     carga=Carga.objects.create(iddocente=codeDocente , idcursodetalle=codeDetalle)
     return render(request,'carga/generar_carga.html')
 
+#========== Eliminar Carga =============
+def delete_carga(request,idcarga):
+    
+    Carga1=get_object_or_404(Carga,idcarga=idcarga)
+    if Carga1:
+        Carga1.delete()
+        return redirect('listar_carga')
+''' 
 def asignar_carga(request,idCursoDetalle):
     print('****************',idCursoDetalle)
     carga_form=None
@@ -84,21 +92,22 @@ def asignar_carga(request,idCursoDetalle):
         error=e 
     return render(request,'carga/generar_carga.html',{'carga_form':carga_form})
 '''
-def asignar_carga(request,idHorario):
-    print("%%%%%%%%%%%%%%%%%%",idHorario)
+
+def asignar_carga(request,idCursoDetalle):
+    print("%%%%%%%%%%%%%%%%%%",idCursoDetalle)
     #initial_data={'idhorario':'','ht':'','hp':'','idd':'','hrinicio':'','hrfin':'','aula':'','idcursodetalle':idcursodetalle}
-    initial_data={'iddocente':'','idhorario':idHorario}
+    initial_data={'iddocente':'','idhorario':idCursoDetalle,'semestrec':''}
     
     
     carga_form=cargaForm(request.POST or None,initial=initial_data)
     if carga_form.is_valid():
         carga_form.save()
         return redirect('listar_cursosdisponibles')
-    carga_form={'cursoHorario_form':carga_form}   
+    #carga_form={'cursoHorario_form':carga_form}   
    
     #return render(request,'curso/Detalle_Curso/Crear_Horario.html',{'cursoHorario_form':cursoHorario_form,'idcursodetalle':idcursodetalle})
-    return render(request,'carga/generar_carga.html',carga_form)
-''' 
+    return render(request,'carga/generar_carga.html',{'carga_form':carga_form})
+
 #---------------------------------------------------------MIGRACION EXEL------------------------------------------------
 def carga_masiva(conn,list,semestre):
     cur = conn.cursor()

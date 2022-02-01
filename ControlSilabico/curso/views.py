@@ -1,6 +1,6 @@
 from django.db.models.query import InstanceCheckMeta
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from ControlSilabico.curso.froms import *
 from ControlSilabico.models import *
 from django.views.generic import CreateView
@@ -48,7 +48,7 @@ def eliminarCurso(request,idcurso):
 def Detalle_Curso(request,idcurso):
     import  pymysql
     #from django.db import co
-    conn = pymysql.connect(host='localhost', user='root', password='', database='dbsilabos', charset='utf8mb4')
+    conn = pymysql.connect(host='localhost', user='root', password='admin', database='dbsilabos', charset='utf8mb4')
     cur = conn.cursor()
     Args=(idcurso,)
     cur.callproc('sp_HroPorCurso',Args)
@@ -63,17 +63,27 @@ def Detalle_Curso(request,idcurso):
             CursoDetalleO=Curso.objects.get(idcurso=idcurso)
             print('CURSO CURSO CURSOS',CursoDetalleO)
             CursoDetalleFilter=Cursodetalle.objects.filter(idcurso_id=idcurso)
-<<<<<<< HEAD
+            print("=======*****=========********",CursoDetalleFilter)
             tamanio=len(CursoDetalleFilter)
-
-
             contexto={'consultas':result1,'CursoDetalleO':CursoDetalleO,'CursoDetFilter':CursoDetalleFilter,'tamanio':tamanio}
-=======
-            contexto={'consultas':result1,'CursoDetalleO':CursoDetalleO,'CursoDetFilter':CursoDetalleFilter}
             print(CursoDetalleO.carrera)
->>>>>>> 629018a5480522218cb4868e4c26ea3ddcdddad0
             #shared =CursoDetalleO.objects.filter(id_idcurso=idc'CursoDetalleO':CursoDetalleOurso)
     return render(request,'curso/Detalle_Curso/Listar_Detalle.html',contexto)
+#======== Eliminar Horario ==========
+
+def delete_horario(request,idhorario,idcurso):
+    horario1=get_object_or_404(Horario,idhorario=idhorario)
+    if horario1:
+        horario1.delete()
+        return redirect('Detalle_Curso',idcurso)
+#======== Eliminar tipo ==========
+
+def delete_tipo(request,idcursodetalle,idcurso):
+    print(" ************* viene o no **********",idcursodetalle,idcurso)
+    tipo1=get_object_or_404(Cursodetalle,idcursodetalle=idcursodetalle)
+    if tipo1:
+        tipo1.delete()
+        return redirect('Detalle_Curso',idcurso)
 # errores con la siguiente funcion
 '''
 def crear_horario(request,idcurso):
@@ -93,6 +103,8 @@ def crear_horario(request,idcurso):
     RecuCurso=Curso.objects.get(idcurso=idcurso)
     return render(request,'curso/Detalle_Curso/Crear_Horario.html',{'cursoDetalle_form':cursoDetalle_form,'horario_form':horario_form,'RecuCurso':RecuCurso})
 '''
+''' 
+#==== CREANDO DETALLE DEL CURSO ====
 def crear_detalle(request,idcurso):
     print('+++++++++++crear_horario')
     #curso_detalle1=Cursodetalle.objects.get(idcurso=idcurso)
@@ -107,6 +119,18 @@ def crear_detalle(request,idcurso):
     else:
         cursoDetalle_form=CursoDetallForm()
     #RecuCurso=Curso.objects.get(idcurso=idcurso)
+    return render(request,'curso/Detalle_Curso/Crear_Detalle.html',{'cursoDetalle_form':cursoDetalle_form})
+'''
+def crear_detalle(request,idcurso):
+    #initial_data={'idhorario':'','ht':'','hp':'','idd':'','hrinicio':'','hrfin':'','aula':'','idcursodetalle':idcursodetalle}
+    initial_data={'idcurso':idcurso}
+    cursoDetalle_form=CursoDetallForm(request.POST or None,initial=initial_data)
+    if cursoDetalle_form.is_valid():
+        cursoDetalle_form.save()
+        return redirect('Detalle_Curso',idcurso)
+    #cursoHorario_form={'cursoHorario_form':cursoDetalle_form}   
+   
+    #return render(request,'curso/Detalle_Curso/Crear_Horario.html',{'cursoHorario_form':cursoHorario_form,'idcursodetalle':idcursodetalle})
     return render(request,'curso/Detalle_Curso/Crear_Detalle.html',{'cursoDetalle_form':cursoDetalle_form})
 ''' 
 def crear_horario(request,idcurso,idcursodetalle):

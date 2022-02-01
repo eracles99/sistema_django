@@ -10,5 +10,10 @@ urlpatterns=[
     #----------------------------Detalle cursos----------------------
     path('Detalle_Curso/<str:idcurso>',Detalle_Curso,name='Detalle_Curso'),
     path('crear_detalle/<str:idcurso>',crear_detalle,name='crear_detalle'),
+    
+    #------- crud -----
     path('crear_horario/<str:idcurso>/<str:idcursodetalle>',crear_horario,name='crear_horario'),
+    path('delete_horario/<int:idhorario>/<str:idcurso>',delete_horario,name='delete_horario'),
+    #------- para tipo -----
+    path('delete_tipo/<int:idcursodetalle>/<str:idcurso>',delete_tipo,name='delete_tipo'),
 ]

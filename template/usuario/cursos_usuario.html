@@ -73,6 +73,13 @@
                             {% endif %}
                         {%endfor%}
                     </div>
+                    <div class="footer">
+                        {%for row in cursos%}
+                            {% if forloop.counter == 1 %}
+                                <a href="{% url 'silabo' row.0 docente.iddocente row.2 row.5 %}" ><button class="Botton btn1">ver silabo</button></a>
+                            {% endif %}
+                        {%endfor%}
+                    </div>
                 </div>
             {% endfor %}
         </section>

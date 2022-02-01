@@ -9,4 +9,6 @@ urlpatterns = [
     path('asignar/<int:idCursoDetalle>',views.asignar_carga,name='asignar'),
     path('asignando/<int:idCursoDetalle>',views.asignando,name='asignando'),
     #path('asignar/<str:idcursodetalle>',views.asignar_carga,name='asignar'),
+    path('delete_carga/<int:idcarga>',views.delete_carga,name='delete_carga'),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

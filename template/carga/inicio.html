@@ -43,6 +43,8 @@
                                 <th>HR-INICIO</th>
                                 <th>HR-FIN</th>
                                 <th>AULA</th>
+                                <th>semestre</th>
+                                <th> </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,8 +63,17 @@
                                     <td>{{c.10}}</td>
                                     <td>{{c.11}}</td>
                                     <td>{{c.12}}</td>
+                                    <td>{{c.13}}</td>
+
+                                    <td>
+                                        
+                                        <a href="{% url 'delete_carga' c.14 %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    </td>
+                                    
+
                                     
                                 </tr>
+                                
                             {% endfor %}
                         </tbody>
                     </table>

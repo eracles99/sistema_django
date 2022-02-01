@@ -18,7 +18,7 @@ def iniciar(request):
     print("================= tipo: ",t)
 
     if request.method=='POST':
-        m=sql.connect(host="localhost", user="root",passwd="",database="dbsilabos")
+        m=sql.connect(host="localhost", user="root",passwd="admin",database="dbsilabos")
         cursor=m.cursor()
         d=request.POST
 

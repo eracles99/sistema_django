@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+   
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,12 +12,25 @@
   {% block extra_css %}
   {% endblock extra_css %}
   <script src="https://kit.fontawesome.com/a098a59c51.js" crossorigin="anonymous"></script>
+  
+  
+
 </head>
-<body id="body">  
+
+<body id="body">
+  
   <header>
+        
     <div class="icon__menu">
       <i class="fas fa-bars" id="btn_open"></i>
     </div>
+    <div style="position: relative;top.0px; right:-1150px;" >
+      <a href="{% url 'iniciar_sesion'%}" class="alert-link">
+        <button   data-dismiss="alert"><strong>Cerrar Sesion</strong></button>
+
+    </a>
+    </div>
+    
   </header>
   <div class='menu__side' id="menu_side" >
 

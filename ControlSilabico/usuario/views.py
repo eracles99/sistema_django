@@ -21,7 +21,7 @@ def asignation(request):
     global usuario,pwd,t,idDo
 
     if request.method=='POST':
-        m=sql.connect(host="localhost", user="root",passwd="",database="dbsilabos")
+        m=sql.connect(host="localhost", user="root",passwd="admin",database="dbsilabos")
         cursor=m.cursor()
         d=request.POST
 
@@ -72,7 +72,7 @@ def cursos_usuario(request,iddocente):
     docente=Docente.objects.get(iddocente=iddocente)
     print(docente.correo)
     print("$$$$$$$$$$$$$$$$$$$$$$$:",iddocente)
-    m=sql.connect(host="localhost", user="root",passwd="",database="dbsilabos")
+    m=sql.connect(host="localhost", user="root",passwd="admin",database="dbsilabos")
     cursor=m.cursor()
     CuDocente="select curso.idCurso,curso.nombre,curso.carrera,creditos,idtipoCurso,grupo,hT,hP,idD,hrInicio,hrFin,Aula,semestrec from ((((docente as d inner join  carga as c on d.idDocente=c.idDocente)inner join  horario as h on h.idhorario=c.idhorario)inner join cursodetalle as cd on cd.idCursoDetalle=h.idCursoDetalle)inner join curso on curso.idCurso=cd.idCurso)where c.idDocente='{}';".format(iddocente)
     cursor.execute(CuDocente)
@@ -509,7 +509,7 @@ def cursos_usuario(request,iddocente):
     return render(request,"usuario/cursos_usuario.html",{'asignaciones':t,'docente':docente,'cursosUsuario':CodCursCarr})
 def silabos(request,codCurso,IdDocente,carrera,semestre):
     
-    conn=pymysql.connect(host="localhost", user="root",passwd="",database="dbsilabos")
+    conn=pymysql.connect(host="localhost", user="root",passwd="admin",database="dbsilabos")
     cursor=conn.cursor()
     docente=Docente.objects.get(iddocente=IdDocente)
     curso=Curso.objects.get(idcurso=codCurso)
@@ -827,6 +827,9 @@ def importar_silabo(tipoIdCarga,rowII,rowIF,conn,cursor,SEMESTRE,exel):
             L=MigracionPracticox2(tipoIdCarga,row,count,sesion,v,L,cursor,SEMESTRE)
             print("main L:",L)
         print("-------------------------------------------------------------")
+
+
+#============================== REgistro ================================
 '''
 def registrar_usuario_docente(request):
     initial_data={'usuario':'','contrasenia':'','tipo':'docente'}
